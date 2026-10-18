@@ -3,7 +3,6 @@
 - **Objetivo:** 172.17.0.2
 - **Fecha:** 2026-10-17
 - **Autor:** chifay
-- **Directorio de trabajo:** `~/DockerLabs/Muy Fácil/Acme`
 - **Clasificación:** Máquina de laboratorio (DockerLabs / dockerlabs.es)
 
 ---
