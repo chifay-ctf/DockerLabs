@@ -1,0 +1,25 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 4 — Configuracion del pool de PHP-FPM (causa raiz del Vector B)
+ Comando     : echo '--- /etc/php/8.1/fpm/pool.d/www.conf ---'; grep -vE '^\s*;|^\s*$' /etc/php/8.1/fpm/pool.d/www.conf; echo; echo '--- procesos php-fpm ---'; ps -eo user,pid,args | grep -E 'php-fpm' | grep -v grep
+================================================================
+
+--- /etc/php/8.1/fpm/pool.d/www.conf ---
+[www]
+user = root
+group = root
+listen = 127.0.0.1:9000
+listen.owner = www-data
+listen.group = www-data
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+
+--- procesos php-fpm ---
+root         270 php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)
+root         334 php-fpm: pool www
+root         337 php-fpm: pool www

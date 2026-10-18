@@ -1,0 +1,48 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 1 — Servidor web en puerto 80
+ Comando     : curl -s -i --max-time 10 http://127.0.0.1/ | head -40
+================================================================
+
+HTTP/1.1 200 OK
+Date: Sun, 18 Oct 2026 04:09:23 GMT
+Server: Apache/2.4.52 (Ubuntu)
+X-Notice: Connect via SSH to view system access banner
+Last-Modified: Thu, 27 Aug 2026 16:42:46 GMT
+ETag: "1169-65a0a0687cd80"
+Accept-Ranges: bytes
+Content-Length: 4457
+Vary: Accept-Encoding
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACME Corporation - Portal en Mantenimiento</title>
+    <style>
+        :root {
+            --bg: #0b1120;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --warning: #f59e0b;
+            --code-bg: #020617;
+            --border: #334155;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+        .container {

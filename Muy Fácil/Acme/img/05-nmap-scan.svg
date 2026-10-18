@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 620" width="1240" height="620">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .by{fill:#64748b;font:400 11.5px 'Segoe UI',system-ui,sans-serif}.byn{fill:#38bdf8;font:700 11.5px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .cmd{fill:#38bdf8;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .dim{fill:#64748b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .big{fill:#f8fafc;font:700 30px 'Segoe UI',system-ui,sans-serif}
+    .mono{fill:#38bdf8;font:700 13px ui-monospace,Menlo,Consolas,monospace}
+  </style>
+  <rect class="bg" width="1240" height="620"/>
+  <text class="ttl" x="20" y="38">Fase 1 — Reconocimiento de puertos</text>
+  <text class="sub" x="20" y="60">Escaneo completo de los 65535 puertos TCP con detección de servicio y scripts NSE</text>
+
+  <!-- terminal -->
+  <rect class="term" x="20" y="86" width="800" height="512" rx="10" stroke="#334155"/>
+  <rect x="20" y="86" width="800" height="28" rx="10" fill="#1e293b"/>
+  <rect x="20" y="104" width="800" height="10" fill="#1e293b"/>
+  <circle cx="40" cy="100" r="5" fill="#ef4444"/><circle cx="58" cy="100" r="5" fill="#f59e0b"/><circle cx="76" cy="100" r="5" fill="#22c55e"/>
+  <text class="dim" x="100" y="104" fill="#64748b">chifay@kali: ~/DockerLabs/Acme</text>
+
+  <text class="cmd" x="36" y="134">$ nmap -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 172.17.0.2</text>
+  <text class="m" x="36" y="156">Starting Nmap 7.991 ( https://nmap.org )</text>
+  <text class="m" x="36" y="174">Nmap scan report for 172.17.0.2</text>
+  <text class="m" x="36" y="192">Host is up, received user-set (0.00049s latency).</text>
+  <text class="dim" x="36" y="210">Scanned at 2026-10-17 20:11:55 CST for 10s</text>
+  <text class="dim" x="36" y="228">Not shown: 65533 closed tcp ports (conn-refused)</text>
+  <text class="m" x="36" y="254">PORT   STATE SERVICE REASON  VERSION</text>
+  <rect x="36" y="258" width="768" height="26" fill="#14532d" opacity="0.35" rx="3"/>
+  <text class="ok" x="42" y="276">22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.16</text>
+  <text class="m" x="42" y="296">| ssh-hostkey:</text>
+  <text class="dim" x="42" y="312">|   256 ae:8a:0a:ff:6e:ce:89:a3:31:d7:da:44:85:0d:f4:de (ECDSA)</text>
+  <text class="dim" x="42" y="328">|   256 3f:e8:fa:07:33:e8:43:0a:22:1d:6d:15:a6:53:04:7e (ED25519)</text>
+  <text class="dim" x="42" y="344">|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGHGeCOP3dwPJpxjDcHF8JiEBeF2T0jn/aTi1cy84Xq</text>
+  <rect x="36" y="350" width="768" height="26" fill="#14532d" opacity="0.35" rx="3"/>
+  <text class="ok" x="42" y="368">80/tcp open  http    syn-ack Apache httpd 2.4.52 ((Ubuntu))</text>
+  <text class="warn" x="42" y="388">|_http-title: ACME Corporation - Portal en Mantenimiento</text>
+  <text class="warn" x="42" y="404">| http-robots.txt: 1 disallowed entry</text>
+  <text class="warn" x="42" y="420">|_/migration_notes.txt</text>
+  <text class="m" x="42" y="440">| http-methods:</text>
+  <text class="dim" x="42" y="456">|_  Supported Methods: POST OPTIONS HEAD GET</text>
+  <text class="m" x="36" y="480">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</text>
+  <text class="dim" x="36" y="502">Nmap done: 1 IP address (1 host up) scanned in 10.21 seconds</text>
+
+  <text class="note" x="36" y="526">Nota: se usó <tspan fill="#38bdf8">-sT</tspan> (connect scan) por no disponer de sudo para <tspan fill="#38bdf8">-sS</tspan> (SYN scan).</text>
+  <text class="note" x="36" y="544">El resultado es equivalente en la detección de puertos y versiones.</text>
+  <text class="note" x="36" y="568" fill="#f59e0b">robots.txt filtrado → /migration_notes.txt</text>
+  <text class="note" x="36" y="584" fill="#f59e0b">«Consulte el banner de conexion de SSH»</text>
+
+  <!-- right panel -->
+  <rect class="panel" x="840" y="86" width="380" height="250" rx="10" stroke="#14532d" stroke-width="2"/>
+  <text class="h" x="856" y="112" fill="#22c55e">Resultado: 2 de 65535 puertos</text>
+  <text class="big" x="856" y="162">2</text>
+  <text class="note" x="892" y="140">puertos abiertos</text>
+  <text class="note" x="892" y="158">de 65535 escaneados</text>
+
+  <rect x="856" y="184" width="348" height="16" rx="8" fill="#1e293b" stroke="#334155"/>
+  <rect x="856" y="184" width="3" height="16" rx="1.5" fill="#22c55e"/>
+  <text class="dim" x="856" y="220">1</text>
+  <text class="dim" x="1200" y="220" text-anchor="end">65535</text>
+
+  <text class="mono" x="856" y="254">22/tcp</text>
+  <text class="note" x="916" y="254">ssh  ·  OpenSSH 8.9p1</text>
+  <text class="mono" x="856" y="282">80/tcp</text>
+  <text class="note" x="916" y="282">http  ·  Apache/2.4.52</text>
+  <text class="dim" x="856" y="314">65533 closed (conn-refused)</text>
+
+  <rect class="panel" x="840" y="352" width="380" height="246" rx="10" stroke="#f59e0b" stroke-width="2"/>
+  <text class="crit" x="856" y="378" fill="#f59e0b">Lo que el escaneo NO muestra</text>
+  <text class="note" x="856" y="402">Desde fuera solo se ven 22 y 80.</text>
+  <text class="note" x="856" y="422">Estos servicios internos escuchan</text>
+  <text class="note" x="856" y="438">solo en loopback y no aparecen:</text>
+  <text class="mono" x="856" y="466">127.0.0.1:8080</text>
+  <text class="note" x="986" y="466">WordPress</text>
+  <text class="mono" x="856" y="490">127.0.0.1:9000</text>
+  <text class="note" x="986" y="490">PHP-FPM</text>
+  <text class="note" x="856" y="518">Por eso la Fase 4 (enumeración interna)</text>
+  <text class="note" x="856" y="534">es imprescindible: el vector B solo es</text>
+  <text class="note" x="856" y="550">visible desde dentro de la máquina.</text>
+  <text class="note" x="856" y="568" fill="#fecaca">Un escaneo externo no habría detectado</text>
+  <text class="note" x="856" y="584" fill="#fecaca">el vector de escalada por WordPress.</text>
+</svg>

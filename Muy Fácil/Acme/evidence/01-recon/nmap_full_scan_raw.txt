@@ -1,0 +1,24 @@
+# Nmap 7.991 scan initiated Sat Oct 17 20:11:55 2026 as: /usr/lib/nmap/nmap --privileged -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 -oN nmap_acme_own 172.17.0.2
+Nmap scan report for 172.17.0.2
+Host is up, received user-set (0.00049s latency).
+Scanned at 2026-10-17 20:11:55 CST for 10s
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE REASON  VERSION
+22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.16 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 ae:8a:0a:ff:6e:ce:89:a3:31:d7:da:44:85:0d:f4:de (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOm3dXSdPFLmcnOQ75wMJU+kR8SBMpY7yzESmBHzp/L8suVhrvL/b0iImxGgEEGk1iPo2oDLHvaL7/db1Jxa0Kg=
+|   256 3f:e8:fa:07:33:e8:43:0a:22:1d:6d:15:a6:53:04:7e (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGHGeCOP3dwPJpxjDcHF8JiEBeF2T0jn/aTi1cy84Xq
+80/tcp open  http    syn-ack Apache httpd 2.4.52 ((Ubuntu))
+| http-robots.txt: 1 disallowed entry 
+|_/migration_notes.txt
+|_http-title: ACME Corporation - Portal en Mantenimiento
+|_http-server-header: Apache/2.4.52 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: POST OPTIONS HEAD GET
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Oct 17 20:12:05 2026 -- 1 IP address (1 host up) scanned in 10.21 seconds

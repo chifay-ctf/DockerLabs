@@ -1,0 +1,51 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 4 — Vhosts de Apache (servicio interno en loopback)
+ Comando     : echo '--- sites-enabled ---'; ls -la /etc/apache2/sites-enabled/; echo; echo '--- 000-default.conf ---'; cat /etc/apache2/sites-enabled/000-default.conf; echo; echo '--- wordpress.conf ---'; cat /etc/apache2/sites-enabled/wordpress.conf
+================================================================
+
+--- sites-enabled ---
+total 8
+drwxr-xr-x 1 root root 4096 Aug 27 17:23 .
+drwxr-xr-x 1 root root 4096 Aug 27 17:23 ..
+lrwxrwxrwx 1 root root   35 Aug 27 17:23 000-default.conf -> ../sites-available/000-default.conf
+lrwxrwxrwx 1 root root   33 Aug 27 17:23 wordpress.conf -> ../sites-available/wordpress.conf
+
+--- 000-default.conf ---
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/maintenance
+
+    <Directory /var/www/maintenance>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    Header always set X-Notice "Connect via SSH to view system access banner"
+
+    ErrorLog ${APACHE_LOG_DIR}/maintenance_error.log
+    CustomLog ${APACHE_LOG_DIR}/maintenance_access.log combined
+</VirtualHost>
+
+--- wordpress.conf ---
+<VirtualHost 127.0.0.1:8080>
+    ServerAdmin soporte-it@acme.corp
+    DocumentRoot /var/www/wordpress
+
+    <Directory /var/www/wordpress>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Forward PHP scripts to PHP-FPM running as root
+    <FilesMatch \.php$>
+        SetHandler "proxy:fcgi://127.0.0.1:9000"
+    </FilesMatch>
+
+    ErrorLog ${APACHE_LOG_DIR}/wordpress_error.log
+    CustomLog ${APACHE_LOG_DIR}/wordpress_access.log combined
+</VirtualHost>

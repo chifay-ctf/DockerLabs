@@ -1,0 +1,15 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 3 — Identidad y bandera de usuario
+ Comando     : id; echo; echo '--- /home/usuario/user.txt ---'; cat /home/usuario/user.txt; echo; echo '--- permisos ---'; ls -la /home/usuario/user.txt
+================================================================
+
+uid=1000(usuario) gid=1000(usuario) groups=1000(usuario)
+
+--- /home/usuario/user.txt ---
+FLAG{nmap_recon_ssh_foothold_7a9f24e1}
+
+--- permisos ---
+-rw-r--r-- 1 usuario usuario 39 Oct 18 01:39 /home/usuario/user.txt

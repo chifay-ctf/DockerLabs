@@ -1,0 +1,20 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 1 — robots.txt y migration_notes.txt
+ Comando     : echo '--- robots.txt ---'; curl -s --max-time 10 http://127.0.0.1/robots.txt; echo; echo '--- migration_notes.txt ---'; curl -s --max-time 10 http://127.0.0.1/migration_notes.txt
+================================================================
+
+--- robots.txt ---
+User-agent: *
+Disallow: /migration_notes.txt
+
+--- migration_notes.txt ---
+================================================================================
+MEMORANDO DE MIGRACION DE INFRAESTRUCTURA - ACME CORP
+================================================================================
+Estado: Migracion interna activa
+Aviso: El acceso a este servidor se canaliza por SSH (puerto 22).
+Consulte el banner de conexion de SSH para obtener las instrucciones del nodo.
+================================================================================

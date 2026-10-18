@@ -1,0 +1,25 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 4 — Binarios con bit SUID/SGID
+ Comando     : find / -xdev \( -perm -4000 -o -perm -2000 \) -type f 2>/dev/null | xargs -r ls -la 2>/dev/null
+================================================================
+
+-rwsr-xr-x 1 root root   1396520 Mar 14  2024 /usr/bin/bash
+-rwxr-sr-x 1 root shadow   72184 Feb  6  2024 /usr/bin/chage
+-rwsr-xr-x 1 root root     72712 Feb  6  2024 /usr/bin/chfn
+-rwsr-xr-x 1 root root     44808 Feb  6  2024 /usr/bin/chsh
+-rwsr-xr-x 1 root root    125688 Mar 23  2022 /usr/bin/dash
+-rwxr-sr-x 1 root shadow   23136 Feb  6  2024 /usr/bin/expiry
+-rwsr-xr-x 1 root root     72072 Feb  6  2024 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root     47488 Mar  6  2026 /usr/bin/mount
+-rwsr-xr-x 1 root root     40496 Feb  6  2024 /usr/bin/newgrp
+-rwsr-xr-x 1 root root     59976 Feb  6  2024 /usr/bin/passwd
+-rwxr-sr-x 1 root _ssh    293304 Jul  9 18:38 /usr/bin/ssh-agent
+-rwsr-xr-x 1 root root     55680 Mar  6  2026 /usr/bin/su
+-rwsr-xr-x 1 root root    232416 Mar  2  2026 /usr/bin/sudo
+-rwsr-xr-x 1 root root     35200 Mar  6  2026 /usr/bin/umount
+-rwsr-xr-x 1 root root    338536 Jul  9 18:38 /usr/lib/openssh/ssh-keysign
+-rwxr-sr-x 1 root shadow   22680 Jul 16 14:06 /usr/sbin/pam_extrausers_chkpwd
+-rwxr-sr-x 1 root shadow   26776 Jul 16 14:06 /usr/sbin/unix_chkpwd

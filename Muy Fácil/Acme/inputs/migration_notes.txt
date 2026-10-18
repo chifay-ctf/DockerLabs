@@ -1,0 +1,7 @@
+================================================================================
+MEMORANDO DE MIGRACION DE INFRAESTRUCTURA - ACME CORP
+================================================================================
+Estado: Migracion interna activa
+Aviso: El acceso a este servidor se canaliza por SSH (puerto 22).
+Consulte el banner de conexion de SSH para obtener las instrucciones del nodo.
+================================================================================

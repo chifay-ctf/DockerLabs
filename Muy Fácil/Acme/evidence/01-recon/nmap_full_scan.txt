@@ -1,0 +1,10 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 1 — Reconocimiento de puertos
+ Comando     : echo 'nmap -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 172.17.0.2'; echo '(salida completa en nmap_acme_own)'; nmap --version | head -1
+================================================================
+
+nmap -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 172.17.0.2
+(salida completa en nmap_acme_own)

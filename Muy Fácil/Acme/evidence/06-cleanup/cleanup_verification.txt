@@ -1,0 +1,21 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Fase        : Limpieza de artefactos en el objetivo
+================================================================
+
+--- plugins/ tras la limpieza ---
+total 32
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 04:09 .
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:40 ..
+drwxrwxrwx 1 www-data www-data 4096 Aug 18 23:42 akismet
+-rwxrwxrwx 1 www-data www-data 2669 Jul  6 21:09 hello.php
+-rwxrwxrwx 1 www-data www-data   28 Jun  5  2014 index.php
+
+--- /tmp ---
+total 8
+drwxrwxrwt 1 root root 4096 Oct 18 01:53 .
+drwxr-xr-x 1 root root 4096 Oct 18 01:39 ..
+
+--- la sonda ya no responde con su contenido ---
+0

