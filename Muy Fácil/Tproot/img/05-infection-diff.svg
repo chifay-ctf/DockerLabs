@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 620" width="1240" height="620">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 12.5px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .mm{fill:#38bdf8;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .add{fill:#22c55e;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .del{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .dim{fill:#64748b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="620"/>
+  <text class="ttl" x="20" y="38">La infección, commit a commit</text>
+  <text class="sub" x="20" y="60">El repositorio git del árbol de fuentes conserva la inyección como un commit normal</text>
+
+  <!-- historial -->
+  <rect class="panel" x="20" y="88" width="1200" height="118" rx="10"/>
+  <text class="h" x="36" y="112">Historial de /tmp/vsftpd-2.3.4-infected</text>
+  <rect class="term" x="36" y="122" width="560" height="74" rx="7"/>
+  <text class="m" x="50" y="144">$ git log --oneline --all</text>
+  <text class="ok" x="50" y="166">e084c95  reapply infection     <tspan fill="#64748b">← el backdoor</tspan></text>
+  <text class="m" x="50" y="186">311e7b9  initial vsftpd files</text>
+
+  <text class="h" x="620" y="144">Autor y fecha del commit</text>
+  <text class="m" x="620" y="166">Nik Du Bois &lt;nik.dubois@otnsystems.com&gt;</text>
+  <text class="m" x="620" y="186">Wed Aug 3 11:23:05 2016 +0200</text>
+
+  <!-- diff vsftpd limpio vs infectado -->
+  <rect class="panel" x="20" y="224" width="596" height="286" rx="10"/>
+  <text class="h" x="36" y="248">vsftpd 2.3.4 ORIGINAL (limpio)</text>
+  <rect class="term" x="36" y="258" width="564" height="238" rx="7"/>
+  <text class="dim" x="50" y="280">--- str.c</text>
+  <text class="dim" x="50" y="300">+++ str.c</text>
+  <text class="dim" x="50" y="324">@@ -569,11 +569,6 @@</text>
+  <text class="m" x="50" y="346">     {</text>
+  <text class="m" x="50" y="366">       return 1;</text>
+  <text class="m" x="50" y="386">     }</text>
+  <text class="m" x="50" y="406">   }</text>
+  <text class="m" x="50" y="426">   return 0;</text>
+  <text class="m" x="50" y="446"> }</text>
+  <text class="dim" x="50" y="470">--- sysdeputil.c</text>
+  <text class="m" x="50" y="490">  (sin vsf_sysutil_extra)</text>
+
+  <rect class="panel" x="624" y="224" width="596" height="286" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="h" x="640" y="248" fill="#ef4444">vsftpd 2.3.4 INFECTADO (en uso)</text>
+  <rect class="term" x="640" y="258" width="564" height="238" rx="7" stroke="#7f1d1d"/>
+  <text class="dim" x="654" y="280">--- str.c</text>
+  <text class="dim" x="654" y="300">+++ str.c</text>
+  <text class="dim" x="654" y="324">@@ -569,6 +569,11 @@</text>
+  <text class="m" x="654" y="346">     {</text>
+  <text class="m" x="654" y="366">       return 1;</text>
+  <text class="m" x="654" y="386">     }</text>
+  <text class="add" x="654" y="410">+    else if((p_str->p_buf[i]==0x3a)</text>
+  <text class="add" x="654" y="428">+    &amp;&amp; (p_str->p_buf[i+1]==0x29))</text>
+  <text class="add" x="654" y="448">+    {</text>
+  <text class="add" x="654" y="466">+      vsf_sysutil_extra();</text>
+  <text class="add" x="654" y="484">+    }</text>
+
+  <!-- notas -->
+  <rect class="panel" x="20" y="528" width="1200" height="76" rx="10" stroke="#f59e0b" stroke-width="2"/>
+  <text class="h" x="36" y="552" fill="#f59e0b">Cómo leer el commit</text>
+  <text class="note" x="36" y="574">El commit añade un fichero <tspan fill="#f59e0b">infection.diff</tspan> con el diff «original vs infectado», y a la vez aplica ese mismo diff sobre str.c y sysdeputil.c.</text>
+  <text class="note" x="36" y="594">El mensaje del commit lo dice literalmente: «undo changes shown in diff in infection report». La infección viaja en el propio parche.</text>
+</svg>

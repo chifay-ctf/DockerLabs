@@ -1,0 +1,25 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 3 — Comportamiento de un solo uso del backdoor
+ Comando     : trigger + 3 conexiones al 6200
+================================================================
+
+PRUEBA DE PERSISTENCIA
+  1) Trigger + conexion A  ->  shell root (uid=0)         marcador=A  SI
+  2) Conexion B con A viva ->  TCP conecta pero SIN shell  marcador=B  NO
+  3) Tras cerrar A         ->  6200 deja de escuchar      Connection refused
+  4) Trigger de nuevo      ->  shell root de nuevo        marcador=R2 SI
+
+EXPLICACION (vsf_sysutil_extra en sysdeputil.c)
+  execl("/bin/sh","sh",(char*)0) REEMPLAZA la imagen del proceso: el bucle
+  for(;;){ accept(...) } deja de existir en cuanto se acepta la primera
+  conexion. El socket sigue ligado (heredado por el shell) pero nadie acepta.
+
+  CONSECUENCIA PRACTICA
+  - Un trigger entrega UN shell root. Hay que mantenerlo vivo.
+  - Al cerrarlo, el listener del 6200 desaparece por completo.
+  - Cada nueva sesion FTP que dispare el backdoor vuelve a armar el 6200.
+  - Ademas, si el 6200 ya esta ocupado, el bind() falla y el proceso hijo
+    hace exit(1) (codigo: if((bind(...)) < 0) exit(1);).

@@ -1,0 +1,18 @@
+# Nmap 7.991 scan initiated Sun Oct 18 16:18:01 2026 as: /usr/lib/nmap/nmap --privileged -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 -oN "/home/chifay/DockerLabs/Muy Fácil/Tproot/nmap_tproot" 172.17.0.2
+Nmap scan report for 172.17.0.2
+Host is up, received user-set (0.00038s latency).
+Scanned at 2026-10-18 16:18:01 CST for 10s
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE REASON  VERSION
+21/tcp open  ftp     syn-ack vsftpd 2.3.4
+|_ftp-anon: got code 500 "OOPS: cannot change directory:/var/ftp".
+80/tcp open  http    syn-ack Apache httpd 2.4.58 ((Ubuntu))
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+| http-methods: 
+|_  Supported Methods: GET POST OPTIONS HEAD
+Service Info: OS: Unix
+
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Oct 18 16:18:11 2026 -- 1 IP address (1 host up) scanned in 9.99 seconds

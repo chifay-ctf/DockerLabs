@@ -1,0 +1,18 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 5 — Configuracion activa de vsftpd
+ Comando     : cat /tmp/vsftpd-2.3.4-infected/vsftpd.conf
+================================================================
+
+anonymous_enable=YES
+dirmessage_enable=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+listen=YES
+local_enable=YES
+write_enable=YES
+
+--- nota ---
+Sin chroot y sin seccomp_sandbox: nada limita la ejecucion de /bin/sh.

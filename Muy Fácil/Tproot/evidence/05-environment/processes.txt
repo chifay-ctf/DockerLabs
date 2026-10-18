@@ -1,0 +1,21 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 5 — Procesos y entrypoint del contenedor
+ Comando     : ps -eo user,pid,ppid,args | grep vsftpd; readlink /proc/88/cwd
+================================================================
+
+root           1       0 /bin/sh -c service apache2 start && sudo ./vsftpd vsftpd.conf
+root          24       1 /usr/sbin/apache2 -k start
+www-data      28      24 /usr/sbin/apache2 -k start
+www-data      29      24 /usr/sbin/apache2 -k start
+root          87       1 sudo ./vsftpd vsftpd.conf
+root          88      87 ./vsftpd vsftpd.conf
+nobody       359     358 ./vsftpd vsftpd.conf
+
+--- cmdline PID 1 (entrypoint) ---
+/bin/sh -c service apache2 start && sudo ./vsftpd vsftpd.conf 
+--- cwd de los vsftpd ---
+PID 88: /tmp/vsftpd-2.3.4-infected
+PID 359:

@@ -1,0 +1,14 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 1 — Banner y respuesta del servicio FTP
+ Comando     : socket -> 21, leer banner; USER anonymous; PASS test
+================================================================
+
+Banner FTP: 220 (vsFTPd 2.3.4)
+USER anonymous -> 331 Please specify the password.
+PASS test     -> 500 OOPS: cannot change directory:/var/ftp
+
+El acceso anonimo falla porque /var/ftp no existe en la imagen, pero el
+servidor responde y revela la version exacta: vsFTPd 2.3.4.

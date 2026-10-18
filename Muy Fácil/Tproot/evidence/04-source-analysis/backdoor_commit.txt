@@ -1,0 +1,28 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 4 — Commit que introduce el backdoor
+ Comando     : git log / git show e084c95 (dentro de /tmp/vsftpd-2.3.4-infected)
+================================================================
+
+e084c95 reapply infection
+311e7b9 initial vsftpd files
+ec15aa2 :neckbeard: Added .gitattributes & .gitignore files
+
+commit e084c9543947d9509ea74731adca427418604cc2
+Author: Nik Du Bois <nik.dubois@otnsystems.com>
+Date:   Wed Aug 3 11:23:05 2016 +0200
+
+    reapply infection
+    
+    undo changes shown in diff in infection report
+
+ infection.diff | 108 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ str.c          |   5 +++
+ sysdeputil.c   |  28 +++++++++++++++
+ 3 files changed, 141 insertions(+)
+
+--- autor y fecha ---
+Nik Du Bois <nik.dubois@otnsystems.com>
+Wed Aug 3 11:23:05 2016 +0200

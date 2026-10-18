@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 470" width="1240" height="470">
+  <style>
+    .bg{fill:#0b1120}.panel{fill:#1e293b;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .bt{fill:#f8fafc;font:700 12.5px 'Segoe UI',system-ui,sans-serif}
+    .bc{fill:#38bdf8;font:400 10.5px ui-monospace,Menlo,Consolas,monospace}
+    .bn{fill:#f59e0b;font:700 11px 'Segoe UI',system-ui,sans-serif}
+    .ar{stroke:#475569;stroke-width:2.5;fill:none}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .ok{fill:#22c55e;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+  </style>
+  <rect class="bg" width="1240" height="470"/>
+  <text class="ttl" x="20" y="38">Tproot — Cadena de ataque (CVE-2011-2523)</text>
+  <text class="sub" x="20" y="60">172.17.0.2 · vsftpd 2.3.4 con backdoor · del banner FTP a un shell root</text>
+
+  <rect class="panel" x="20" y="100" width="170" height="150" rx="10"/>
+  <text class="bn" x="32" y="122">FASE 1 · RECON</text>
+  <text class="bt" x="32" y="142">nmap -p- -sV</text>
+  <text class="bc" x="32" y="162">21/tcp  vsftpd</text>
+  <text class="bc" x="32" y="176">        2.3.4</text>
+  <text class="bc" x="32" y="196">80/tcp  Apache</text>
+  <text class="bc" x="32" y="210">        2.4.58</text>
+  <text class="bc" x="32" y="230">banner FTP:</text>
+  <text class="bc" x="32" y="240">220 (vsFTPd 2.3.4)</text>
+
+  <rect class="panel" x="226" y="100" width="170" height="150" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="bn" x="238" y="122">FASE 2 · MAGIC</text>
+  <text class="bt" x="238" y="142">USER backdoor:)</text>
+  <text class="bc" x="238" y="162">331 Please specify</text>
+  <text class="bc" x="238" y="176">the password.</text>
+  <text class="bc" x="238" y="196">PASS x</text>
+  <text class="bc" x="238" y="210">(sin respuesta)</text>
+  <text class="bc" x="238" y="230">0.0.0.0:6200 LISTEN</text>
+
+  <rect class="panel" x="432" y="100" width="170" height="150" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="bn" x="444" y="122">FASE 3 · SHELL</text>
+  <text class="bt" x="444" y="142">nc 6200</text>
+  <text class="bc" x="444" y="162">uid=0(root)</text>
+  <text class="bc" x="444" y="176">gid=0(root)</text>
+  <text class="bc" x="444" y="190">groups=0(root)</text>
+  <text class="bc" x="444" y="212">/bin/sh como root</text>
+  <text class="bc" x="444" y="230">sin chroot</text>
+
+  <rect class="panel" x="638" y="100" width="170" height="150" rx="10"/>
+  <text class="bn" x="650" y="122">FASE 4 · FUENTE</text>
+  <text class="bt" x="650" y="142">str.c</text>
+  <text class="bc" x="650" y="160">0x3a 0x29  → ':)'</text>
+  <text class="bt" x="650" y="182">privops.c</text>
+  <text class="bc" x="650" y="198">handle_login()</text>
+  <text class="bt" x="650" y="218">sysdeputil.c</text>
+  <text class="bc" x="650" y="234">vsf_sysutil_extra()</text>
+
+  <rect class="panel" x="844" y="100" width="170" height="150" rx="10"/>
+  <text class="bn" x="856" y="122">FASE 5 · DETALLE</text>
+  <text class="bt" x="856" y="142">De un solo uso</text>
+  <text class="bc" x="856" y="162">execl() reemplaza</text>
+  <text class="bc" x="856" y="176">la imagen del</text>
+  <text class="bc" x="856" y="190">proceso</text>
+  <text class="bc" x="856" y="210">1 trigger</text>
+  <text class="bc" x="856" y="224">= 1 shell</text>
+  <text class="bc" x="856" y="240">re-armable</text>
+
+  <rect class="panel" x="1050" y="100" width="170" height="150" rx="10" stroke="#22c55e" stroke-width="2"/>
+  <text class="bn" x="1062" y="122" fill="#22c55e">FASE 6 · ROOT</text>
+  <text class="bt" x="1062" y="142">/root/root.txt</text>
+  <text class="bc" x="1062" y="162">261fd3f32</text>
+  <text class="bc" x="1062" y="176">200f950f2</text>
+  <text class="bc" x="1062" y="190">31816b4e9</text>
+  <text class="bc" x="1062" y="204">a0594</text>
+  <text class="bc" x="1062" y="226" fill="#22c55e">✔ bandera</text>
+
+  <path class="ar" d="M190 170 L222 170"/>
+  <path class="ar" d="M396 170 L428 170"/>
+  <path class="ar" d="M602 170 L634 170"/>
+  <path class="ar" d="M808 170 L840 170"/>
+  <path class="ar" d="M1014 170 L1046 170"/>
+
+  <text class="note" x="20" y="272">El vector es el backdoor compilado en el propio binario de vsftpd: no hay que explotar ninguna vulnerabilidad de forma remota ni busqué una credencial válida.</text>
+
+  <rect class="panel" x="20" y="292" width="1200" height="158" rx="10"/>
+  <text class="crit" x="36" y="316">HALLAZGO PRINCIPAL</text>
+  <text class="note" x="36" y="340">vsftpd 2.3.4 (build 2011, con "reapply infection" de 2016) incluye una puerta trasera en la funcion str_contains_space():</text>
+  <text class="note" x="36" y="362">al detectar la secuencia ':)' en el nombre de usuario, invoca vsf_sysutil_extra(), que abre un /bin/sh en el puerto 6200.</text>
+  <text class="note" x="36" y="384">El shell se ejecuta como root porque el disparo ocurre en handle_login(), antes de que vsftpd ceda el proceso al usuario sin privilegios.</text>
+  <text class="note" x="36" y="406">El arbol de fuentes infectado queda en el propio contenedor (/tmp/vsftpd-2.3.4-infected), con su repositorio git: el commit e084c95 documenta la inyeccion.</text>
+  <text class="note" x="36" y="428">Sin chroot y sin seccomp_sandbox en la configuracion activa, nada restringe la ejecucion de /bin/sh.</text>
+</svg>

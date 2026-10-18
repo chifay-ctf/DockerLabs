@@ -1,0 +1,65 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 1 — Reconocimiento de puertos
+ Comando     : nmap -p- -sV -sC -sT -vv -n -Pn 172.17.0.2
+================================================================
+
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-18 16:18 -0600
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+Initiating Connect Scan at 16:18
+Scanning 172.17.0.2 [65535 ports]
+Discovered open port 21/tcp on 172.17.0.2
+Discovered open port 80/tcp on 172.17.0.2
+Completed Connect Scan at 16:18, 3.58s elapsed (65535 total ports)
+Initiating Service scan at 16:18
+Scanning 2 services on 172.17.0.2
+Completed Service scan at 16:18, 6.04s elapsed (2 services on 1 host)
+NSE: Script scanning 172.17.0.2.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.07s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.06s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+Nmap scan report for 172.17.0.2
+Host is up, received user-set (0.00038s latency).
+Scanned at 2026-10-18 16:18:01 CST for 10s
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE REASON  VERSION
+21/tcp open  ftp     syn-ack vsftpd 2.3.4
+|_ftp-anon: got code 500 "OOPS: cannot change directory:/var/ftp".
+80/tcp open  http    syn-ack Apache httpd 2.4.58 ((Ubuntu))
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+| http-methods: 
+|_  Supported Methods: GET POST OPTIONS HEAD
+Service Info: OS: Unix
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 16:18
+Completed NSE at 16:18, 0.00s elapsed
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 9.99 seconds

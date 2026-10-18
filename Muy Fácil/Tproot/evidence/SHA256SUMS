@@ -1,0 +1,14 @@
+d2ff3f079307873f9efeb8247839904ecafea1970a840a1739db78aca15f350f  ./01-recon/ftp_banner.txt
+e057c0821aec5c7cbfc0674616459fa9cb0bb7a9cf8b6a0fdc9d8e58eee31ae9  ./01-recon/nmap_full_scan.txt
+b351a6a3aa9cd90f0f922dc7cc584d83b3f1994e36768faf4f2121c9af736d36  ./02-backdoor-trigger/trigger_matrix.txt
+4c1345e4d4bccebfc1317bbaed706ff8aa75b096a5cf10fb7f7793bbb3afff1f  ./02-backdoor-trigger/trigger_sequence.txt
+2608d5f4a59a663431b5898f29998ed82c93f2544392d4d58eb50354c066f230  ./03-root-shell/root_flag.txt
+d1e8f878ef190bd8bcb1091c05addc44518b194daa8341dc1c9a9091b8c4e8d0  ./03-root-shell/root_shell.txt
+2d201cdfbc2db6333449eebbf9c9f80e1ab0d48930aa186d5034c0310a2a5ed8  ./03-root-shell/single_use_behaviour.txt
+349a106718fd44fcb4da833956cbc9e1a8d0297230d3b288269c97f353194bc4  ./04-source-analysis/backdoor_commit.txt
+eec458bb743ba8319760c2751d190ab377e7e3fdf121edefb0b7158b282950b5  ./04-source-analysis/privops_call_site.txt
+6403870b5c3a4b29b976b4b5f7b68c250853084e45920438b3e15da5dcab0cd2  ./04-source-analysis/str_contains_space.txt
+5d086148f447a6d924e50b97a3c9d871d0d89e300c210a6b910bd5e56f237f9e  ./04-source-analysis/vsf_sysutil_extra.txt
+9b869911f2b4eef0c2da6bf8626c6c4a9b947b5a177f12b545ea9e4435e14271  ./05-environment/processes.txt
+21fa9b44e2b465d05ff651fdd49680bc5486a0bcadcaa901b7ad0b06cb450c50  ./05-environment/vsftpd_build.txt
+331803e9992be72b594275179821b751c8394ba0a5ea71bb6c42ccc05f3e86a5  ./05-environment/vsftpd_conf.txt

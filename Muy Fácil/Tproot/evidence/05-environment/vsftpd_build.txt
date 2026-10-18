@@ -1,0 +1,25 @@
+================================================================
+ Tproot — Evidencia de auditoría (CVE-2011-2523)
+ Fecha (UTC) : 2026-10-18T22:18:01Z
+ Objetivo    : 172.17.0.2
+ Fase        : Fase 5 — Binario y arbol de compilacion
+ Comando     : ls -la /tmp/vsftpd-2.3.4-infected/vsftpd; strings vsftpd | grep /bin/sh
+================================================================
+
+total 1556
+drwxr-xr-x 1 root root   4096 Feb  3  2025 .
+drwxrwxrwt 1 root root   4096 Oct 18 21:27 ..
+drwxr-xr-x 1 root root   4096 Oct 18 22:05 .git
+-rw-r--r-- 1 root root    378 Feb  3  2025 .gitattributes
+-rw-r--r-- 1 root root    649 Feb  3  2025 .gitignore
+-rw-r--r-- 1 root root   1392 Feb  3  2025 AUDIT
+-rw-r--r-- 1 root root   2908 Feb  3  2025 BENCHMARKS
+-rw-r--r-- 1 root root   1046 Feb  3  2025 BUGS
+-rw-r--r-- 1 root root  18288 Feb  3  2025 COPYING
+-rw-r--r-- 1 root root    116 Feb  3  2025 COPYRIGHT
+-rw-r--r-- 1 root root  62903 Feb  3  2025 Changelog
+
+-rwxr-xr-x 1 root root 147768 Feb  3  2025 /tmp/vsftpd-2.3.4-infected/vsftpd
+
+--- cadenas relevantes en el binario ---
+/bin/sh
