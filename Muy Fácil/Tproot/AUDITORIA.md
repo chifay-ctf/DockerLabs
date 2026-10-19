@@ -3,7 +3,6 @@
 - **Objetivo:** 172.17.0.2
 - **Fecha:** 2026-10-18
 - **Autor:** chifay
-- **Directorio de trabajo:** `~/DockerLabs/Muy Fácil/Tproot`
 - **Clasificación:** Máquina de laboratorio (DockerLabs / dockerlabs.es)
 - **Vector:** Backdoor de vsftpd 2.3.4 (CVE-2011-2523)
 
