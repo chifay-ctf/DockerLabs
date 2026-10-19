@@ -1,0 +1,11 @@
+# Respuesta HTTP completa
+HTTP/1.1 200 OK
+Date: Mon, 19 Oct 2026 21:48:37 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Last-Modified: Tue, 29 Oct 2024 18:33:53 GMT
+ETag: "6-625a1d3c30640"
+Accept-Ranges: bytes
+Content-Length: 6
+Content-Type: text/html
+
+tails

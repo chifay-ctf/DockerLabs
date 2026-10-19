@@ -1,0 +1,10 @@
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+uid=1001(sonic) gid=1001(sonic) groups=1001(sonic),27(sudo)
+---
+User sonic may run the following commands on 378958b2c98e:
+    (ALL) NOPASSWD: ALL
+---
+/home/tails
+ls: cannot open directory '.': Permission denied
+---
+"/home/sonic/.bashrcn""/home/sonic/.sudo_as_admin_successfuln""/home/sonic/.bash_logoutn""/home/sonic/.bash_historyn""/home/sonic/.profilen"

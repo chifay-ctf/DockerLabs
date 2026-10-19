@@ -1,0 +1,11 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 3 — Reglas de sudo de tails
+ Comando     : sudo -n -l
+================================================================
+
+User tails may run the following commands on 378958b2c98e:
+    (sonic) NOPASSWD: ALL

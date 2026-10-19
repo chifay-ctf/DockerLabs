@@ -1,0 +1,15 @@
+# Comprobación de CVE-2024-6387 (regreSSHion) en el paquete instalado
+# Fecha (UTC): 2026-10-19T22:18:33Z
+
+$ dpkg -l openssh-server | tail -1
+ii  openssh-server 1:9.6p1-3ubuntu13.5 amd64        secure shell (SSH) server, for secure access from remote machines
+
+$ zcat /usr/share/doc/openssh-server/changelog.Debian.gz | grep -B2 -A2 CVE-2024-6387.patch
+  * SECURITY UPDATE: remote code execution via signal handler race
+    condition (LP: #2070497)
+    - debian/patches/CVE-2024-6387.patch: don't log in sshsigdie() in log.c.
+    - CVE-2024-6387
+
+
+Conclusión: el paquete Ubuntu 1:9.6p1-3ubuntu13.5 incluye el parche
+de CVE-2024-6387 (LP: #2070497); la versión no es explotable por regreSSHion.

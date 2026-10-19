@@ -1,0 +1,36 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 1 — La pista en el servidor web
+ Comando     : curl -s -i http://172.17.0.2/ | head -20
+================================================================
+
+El servidor Apache del puerto 80 publica UN SOLO fichero, index.html,
+con 6 bytes de contenido:
+
+    $ curl -s http://172.17.0.2/
+    tails
+
+    $ xxd
+    00000000: 7461 696c 730a                     tails.
+
+Cabeceras:
+    HTTP/1.1 200 OK
+    Server: Apache/2.4.58 (Ubuntu)
+    Last-Modified: Tue, 29 Oct 2024 18:33:53 GMT
+    ETag: "6-625a1d3c30640"
+    Content-Length: 6
+    Content-Type: text/html
+
+El ETag "6-625a1d3c30640" es el tamano (6) y el mtime del fichero:
+0x625a1d3c30640 = 2024-10-29 12:33:53 UTC. No codifica informacion extra.
+
+Verificado que NO hay mas contenido:
+  - gobuster con dirb/big.txt y 12 extensiones -> solo .htaccess/.htpasswd (403)
+  - nikto -Tuning x -> solo avisos de cabeceras de seguridad ausentes
+  - 212 nombres de ruta derivados del tema y del castellano -> todos 404
+  - 5 cabeceras Host alternativos -> todos devuelven el mismo index
+  - metodos HTTP no estandar (PROPFIND, PUT, DELETE, TRACE, PATCH, MKCOL)
+    -> todos 405 Method Not Allowed

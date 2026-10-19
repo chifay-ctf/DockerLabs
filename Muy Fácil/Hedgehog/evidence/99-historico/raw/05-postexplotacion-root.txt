@@ -1,0 +1,95 @@
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+uid=0(root) gid=0(root) groups=0(root)
+---PASSWD---
+root:x:0:0:root:/root:/bin/bash
+sonic:x:1001:1001::/home/sonic:/bin/bash
+tails:x:1002:1002::/home/tails:/bin/bash
+---SONIC-DOC---
+total 12
+drwxr-xr-x 2 sonic sonic 4096 Oct 29  2024 .
+drwxr-x--- 4 sonic sonic 4096 Oct 29  2024 ..
+-rw-r--r-- 1 sonic sonic   10 Oct 29  2024 contraseña
+perritos!
+
+---ROOT-LS---
+total 24
+drwx------ 1 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-rw------- 1 root root  150 Oct 29  2024 .bash_history
+-rw-r--r-- 1 root root 3106 Apr 22  2024 .bashrc
+-rw-r--r-- 1 root root  161 Apr 22  2024 .profile
+drwx------ 2 root root 4096 Oct 29  2024 .ssh
+---SUDOERS---
+tails ALL=(sonic) NOPASSWD:ALL
+sonic ALL=(ALL) NOPASSWD:ALL
+total 12
+drwxr-xr-x 2 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-r--r----- 1 root root 1068 Jan 29  2024 README
+---FLAGFILES---
+/usr/share/zoneinfo/America/Bahia_Banderas
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/waitflags.ph
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/ss_flags.ph
+/usr/lib/python3.12/__pycache__/secrets.cpython-312.pyc
+/usr/lib/python3.12/secrets.py
+---RECENT---
+/usr/share/python3/debpython/__pycache__/files.cpython-312.pyc
+/usr/share/python3/debpython/__pycache__/option.cpython-312.pyc
+/usr/share/python3/debpython/__pycache__/version.cpython-312.pyc
+/usr/share/python3/debpython/__pycache__/__init__.cpython-312.pyc
+/usr/share/python3/debpython/__pycache__/interpreter.cpython-312.pyc
+/usr/share/python3/__pycache__/py3versions.cpython-312.pyc
+/usr/share/mime/video/3gpp2.xml
+/usr/share/mime/video/annodex.xml
+/usr/share/mime/video/x-ms-wmv.xml
+/usr/share/mime/video/x-javafx.xml
+/usr/share/mime/video/mp4.xml
+/usr/share/mime/video/x-sgi-movie.xml
+/usr/share/mime/video/mj2.xml
+/usr/share/mime/video/wavelet.xml
+/usr/share/mime/video/ogg.xml
+/usr/share/mime/video/x-matroska-3d.xml
+/usr/share/mime/video/x-flic.xml
+/usr/share/mime/video/x-theora+ogg.xml
+/usr/share/mime/video/isivideo.xml
+/usr/share/mime/video/mp2t.xml
+/usr/share/mime/video/x-flv.xml
+/usr/share/mime/video/x-mjpeg.xml
+/usr/share/mime/video/3gpp.xml
+/usr/share/mime/video/vnd.radgamettools.smacker.xml
+/usr/share/mime/video/x-ogm+ogg.xml
+/usr/share/mime/video/quicktime.xml
+/usr/share/mime/video/vnd.mpegurl.xml
+/usr/share/mime/video/vnd.vivo.xml
+/usr/share/mime/video/x-matroska.xml
+/usr/share/mime/video/x-mng.xml
+/usr/share/mime/video/vnd.rn-realvideo.xml
+/usr/share/mime/video/mpeg.xml
+/usr/share/mime/video/vnd.avi.xml
+/usr/share/mime/video/x-nsv.xml
+/usr/share/mime/video/vnd.radgamettools.bink.xml
+/usr/share/mime/video/webm.xml
+/usr/share/mime/video/dv.xml
+/usr/share/mime/video/vnd.youtube.yt.xml
+/usr/share/mime/video/x-anim.xml
+/usr/share/mime/text/x-texinfo.xml
+/usr/share/mime/text/vnd.rn-realtext.xml
+/usr/share/mime/text/x-lilypond.xml
+/usr/share/mime/text/x-opencl-src.xml
+/usr/share/mime/text/x-credits.xml
+/usr/share/mime/text/x-typst.xml
+/usr/share/mime/text/x-scss.xml
+/usr/share/mime/text/x-systemd-unit.xml
+/usr/share/mime/text/x-vala.xml
+/usr/share/mime/text/x-tex.xml
+/usr/share/mime/text/csv-schema.xml
+/usr/share/mime/text/x-component.xml
+/usr/share/mime/text/x-dcl.xml
+/usr/share/mime/text/x-maven+xml.xml
+/usr/share/mime/text/troff.xml
+/usr/share/mime/text/csv.xml
+/usr/share/mime/text/sgml.xml
+/usr/share/mime/text/x-troff-ms.xml
+/usr/share/mime/text/x-setext.xml
+/usr/share/mime/text/x-install.xml
+/usr/share/mime/text/x-csharp.xml

@@ -1,0 +1,30 @@
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+---DOCS---
+total 12
+drwxr-xr-x 2 sonic sonic 4096 Oct 29  2024 .
+drwxr-x--- 4 sonic sonic 4096 Oct 29  2024 ..
+-rw-r--r-- 1 sonic sonic   10 Oct 29  2024 contraseña
+---CONTRASENA---
+
+---ROOT-HISTORY---
+ls
+cd sonic
+ls -la
+cd Documents
+cd Documentos
+cd ..
+ls
+cd usr
+ls
+cd ..
+cd home
+ls
+cd sonic
+ñls
+ls
+cd Documentos
+ls
+mv contrasena contraseña
+ls
+exit
+---FIND---

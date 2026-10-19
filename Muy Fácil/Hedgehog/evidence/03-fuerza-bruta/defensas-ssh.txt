@@ -1,0 +1,39 @@
+=== MEDICION DE DEFENSAS SSH — 172.17.0.2 ===
+=== fecha: 2026-10-19 15:43:18 ===
+
+--- Retardo por fallo: 5 muestras secuenciales (usuario tails) ---
+  intento 1: tcp=0.001s  kex=0.008s  auth=3.590s -> denegado
+  intento 2: tcp=0.000s  kex=0.012s  auth=3.592s -> denegado
+  intento 3: tcp=0.000s  kex=0.010s  auth=3.588s -> denegado
+  intento 4: tcp=0.000s  kex=0.009s  auth=3.591s -> denegado
+  intento 5: tcp=0.000s  kex=0.008s  auth=3.587s -> denegado
+
+--- MaxAuthTries: hasta 8 intentos sobre UNA sola conexion ---
+  intento 1: denegado (la conexion sigue viva)
+  intento 2: denegado (la conexion sigue viva)
+  intento 3: denegado (la conexion sigue viva)
+  intento 4: denegado (la conexion sigue viva)
+  intento 5: denegado (la conexion sigue viva)
+  intento 6: denegado (la conexion sigue viva)
+  intento 7: SSHException: No existing session
+
+--- Tasa practica: 40 hilos durante 30 s ---
+  intentos=375  tiempo=33.9s  tasa=11.1 intentos/s
+--- Tasa practica: 80 hilos durante 30 s ---
+  intentos=749  tiempo=34.7s  tasa=21.6 intentos/s
+
+--- Retardo por fallo: 3 muestras secuenciales (usuario tails) ---
+  intento 1: tcp=0.001s  kex=0.007s  auth=3.591s -> denegado
+  intento 2: tcp=0.000s  kex=0.011s  auth=3.590s -> denegado
+  intento 3: tcp=0.001s  kex=0.017s  auth=3.588s -> denegado
+
+=== fin ===
+
+--- Contraste: usuario INEXISTENTE vs existente (mismo momento, secuencial) ---
+  zzzcontrol001    [2.176, 2.176, 4.304]
+  zzzcontrol002    [2.39, 2.391, 4.739]
+  tails            [1.82, 3.589, 3.588]
+  sonic            [2.272, 2.272, 2.271]
+
+--- Tasa practica: 100 hilos durante 30 s ---
+  intentos=1020  tiempo=35.1s  tasa=29.1 intentos/s

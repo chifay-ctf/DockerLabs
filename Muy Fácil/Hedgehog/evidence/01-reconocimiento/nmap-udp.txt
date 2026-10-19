@@ -1,0 +1,19 @@
+# Escaneo UDP de los 10 puertos mas comunes
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-19 15:48 -0600
+Nmap scan report for 172.17.0.2
+Host is up (0.000083s latency).
+
+PORT     STATE         SERVICE
+53/udp   closed        domain
+67/udp   closed        dhcps
+123/udp  closed        ntp
+135/udp  closed        msrpc
+137/udp  closed        netbios-ns
+138/udp  closed        netbios-dgm
+161/udp  closed        snmp
+445/udp  open|filtered microsoft-ds
+631/udp  open|filtered ipp
+1434/udp closed        ms-sql-m
+MAC Address: 46:49:62:D0:48:3C (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 6.25 seconds

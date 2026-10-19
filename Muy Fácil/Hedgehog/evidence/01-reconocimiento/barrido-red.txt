@@ -1,0 +1,8 @@
+# Barrido de la red del laboratorio
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-19 15:48 -0600
+Nmap scan report for 172.17.0.2
+Host is up (0.000063s latency).
+MAC Address: 46:49:62:D0:48:3C (Unknown)
+Nmap scan report for 172.17.0.1
+Host is up.
+Nmap done: 256 IP addresses (2 hosts up) scanned in 1.91 seconds

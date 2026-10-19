@@ -1,0 +1,63 @@
+# Busqueda de banderas como root (uid 0)
+$ id
+uid=0(root) gid=0(root) groups=0(root)
+
+$ find / -xdev \( -iname "*flag*" -o -iname "*bandera*" -o -iname "user.txt" -o -iname "root.txt" \) -print
+/usr/share/zoneinfo/America/Bahia_Banderas
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/waitflags.ph
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/ss_flags.ph
+(fin: solo aparecen ficheros de sistema)
+
+# Rutas candidatas
+/root/root.txt               no existe
+/home/tails/user.txt         no existe
+/home/sonic/user.txt         no existe
+/home/ubuntu/user.txt        no existe
+/flag                        no existe
+/flag.txt                    no existe
+/root/flag.txt               no existe
+
+# Todos los ficheros regulares fuera de las rutas de sistema
+/home/ubuntu/.bashrc
+/home/ubuntu/.bash_logout
+/home/ubuntu/.profile
+/home/tails/.bashrc
+/home/tails/.bash_logout
+/home/tails/.profile
+/home/tails/.cache/motd.legal-displayed
+/home/sonic/.bashrc
+/home/sonic/.sudo_as_admin_successful
+/home/sonic/.bash_logout
+/home/sonic/.bash_history
+/home/sonic/Documentos/contraseña
+/home/sonic/.cache/motd.legal-displayed
+/home/sonic/.profile
+/root/.bashrc
+/root/.profile
+/root/.bash_history
+/var/www/html/index.html
+/.dockerenv
+
+# Contenido del unico fichero no estandar de usuario
+perritos!
+
+# Directorios vacios de posible montaje
+/media:
+total 8
+drwxr-xr-x 2 root root 4096 Oct 11  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+
+/mnt:
+total 8
+drwxr-xr-x 2 root root 4096 Oct 11  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+
+/opt:
+total 8
+drwxr-xr-x 2 root root 4096 Oct 11  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+
+/srv:
+total 8
+drwxr-xr-x 2 root root 4096 Oct 11  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..

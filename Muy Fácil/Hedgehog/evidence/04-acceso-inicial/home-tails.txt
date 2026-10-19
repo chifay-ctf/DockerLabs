@@ -1,0 +1,26 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 3 — Permisos y contenido del home de tails
+ Comando     : ls -la ~; id; find /home -maxdepth 2 -type f -readable
+================================================================
+
+total 28
+drwxr-x--- 1 tails tails 4096 Oct 19 23:35 .
+drwxr-xr-x 1 root  root  4096 Oct 29  2024 ..
+-rw-r--r-- 1 tails tails  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 tails tails 3771 Mar 31  2024 .bashrc
+drwx------ 2 tails tails 4096 Oct 19 23:35 .cache
+-rw-r--r-- 1 tails tails  807 Mar 31  2024 .profile
+
+--- id ---
+uid=1002(tails) gid=1002(tails) groups=1002(tails)
+
+--- ficheros legibles en /home ---
+find: ‘/home/ubuntu’: Permission denied
+/home/tails/.bashrc
+/home/tails/.bash_logout
+/home/tails/.profile
+find: ‘/home/sonic’: Permission denied

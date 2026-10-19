@@ -1,0 +1,70 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 1 — Reconocimiento de puertos
+ Comando     : nmap -p- -sV -sC -sT -vv -n -Pn 172.17.0.2
+================================================================
+
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-19 15:53 -0600
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+Initiating Connect Scan at 15:53
+Scanning 172.17.0.2 [65535 ports]
+Discovered open port 22/tcp on 172.17.0.2
+Discovered open port 80/tcp on 172.17.0.2
+Completed Connect Scan at 15:53, 2.41s elapsed (65535 total ports)
+Initiating Service scan at 15:53
+Scanning 2 services on 172.17.0.2
+Completed Service scan at 15:53, 6.02s elapsed (2 services on 1 host)
+NSE: Script scanning 172.17.0.2.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.11s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.01s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+Nmap scan report for 172.17.0.2
+Host is up, received user-set (0.00014s latency).
+Scanned at 2026-10-19 15:53:42 CST for 9s
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE REASON  VERSION
+22/tcp open  ssh     syn-ack OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 34:0d:04:25:20:b6:e5:fc:c9:0d:cb:c9:6c:ef:bb:a0 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNt2acaF9CKWqvibDqz36bJdqRXhBhBqCOAtvExAJy9Q2FullFAzNST6vJm0xFrlmpgS6fZb5+l3aTYFC18zyNU=
+|   256 05:56:e3:50:e8:f4:35:96:fe:6b:94:c9:da:e9:47:1f (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH2vWYkHZteiOgnLadFoN6gkctYlQYhtwGFeA7lm1OKE
+80/tcp open  http    syn-ack Apache httpd 2.4.58 ((Ubuntu))
+| http-methods: 
+|_  Supported Methods: HEAD GET POST OPTIONS
+|_http-title: Site doesn't have a title (text/html).
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 15:53
+Completed NSE at 15:53, 0.00s elapsed
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 8.73 seconds

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 660" width="1240" height="660">
+  <style>
+    .bg{fill:#0b1120}
+    .panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .mm{fill:#38bdf8;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .tag{fill:#020617;font:700 10.5px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="660"/>
+  <text class="ttl" x="20" y="38">Wordlist: el plan inicial y el giro final</text>
+  <text class="sub" x="20" y="60">Más de 275.000 intentos con listas curadas; el atajo apareció al invertir la cola de rockyou</text>
+
+  <!-- ORDEN -->
+  <rect class="panel" x="20" y="84" width="600" height="326" rx="10"/>
+  <text class="h" x="36" y="110">Plan inicial: orden de ataque (de más a menos probable)</text>
+
+  <rect x="36" y="124" width="260" height="30" rx="6" fill="#0e7490"/>
+  <text class="tag" x="48" y="144" fill="#cffafe">1 · TEMÁTICA — Sega / Sonic</text>
+  <text class="m" x="310" y="144">34.694 candidatos</text>
+
+  <rect x="36" y="160" width="260" height="30" rx="6" fill="#155e75"/>
+  <text class="tag" x="48" y="180" fill="#cffafe">2 · ESTILO DEL AUTOR</text>
+  <text class="m" x="310" y="180">12.828</text>
+
+  <rect x="36" y="196" width="260" height="30" rx="6" fill="#1e40af"/>
+  <text class="tag" x="48" y="216" fill="#dbeafe">3 · xato-net-10M top 100k</text>
+  <text class="m" x="310" y="216">100.000</text>
+
+  <rect x="36" y="232" width="260" height="30" rx="6" fill="#3730a3"/>
+  <text class="tag" x="48" y="252" fill="#e0e7ff">4 · nmap.lst + john.lst</text>
+  <text class="m" x="310" y="252">8.566</text>
+
+  <rect x="36" y="268" width="260" height="30" rx="6" fill="#6b21a8"/>
+  <text class="tag" x="48" y="288" fill="#f3e8ff">5 · rockyou por tramos</text>
+  <text class="m" x="310" y="288">150.000</text>
+
+  <rect x="36" y="304" width="260" height="30" rx="6" fill="#831843"/>
+  <text class="tag" x="48" y="324" fill="#fce7f3">6 · diccionario español</text>
+  <text class="m" x="310" y="324">56.219</text>
+
+  <text class="note" x="36" y="360">Tamaños antes de deduplicar. En total se probaron más de 275.000 intentos</text>
+  <text class="note" x="36" y="380">(~24 h de reloj) y el password no estaba en ningún bloque: vivía en la</text>
+  <text class="note" x="36" y="400">cola de rockyou (fig. siguiente).</text>
+
+  <!-- FUENTES -->
+  <rect class="panel" x="636" y="84" width="584" height="326" rx="10"/>
+  <text class="h" x="652" y="110">De dónde sale cada bloque</text>
+  <rect class="term" x="652" y="122" width="552" height="132" rx="7"/>
+  <text class="m" x="666" y="146">temática:  términos x casos x sufijos x separadores</text>
+  <text class="m" x="666" y="166">           casos: lower upper Capitalize Title camelCase</text>
+  <text class="m" x="666" y="186">           leet:  t41ls  s0nic  h3dg3h0g</text>
+  <text class="m" x="666" y="206">           sufijos: "" 1 12 123 1234 ! !! @ # $ 2024...</text>
+  <text class="m" x="666" y="226">           separadores: - _ . @ # (espacio)</text>
+  <text class="mm" x="666" y="246">xato-10M: frecuencia real de uso en filtraciones</text>
+
+  <text class="h" x="652" y="280">Por qué rockyou no va primero</text>
+  <text class="note" x="652" y="302">Su orden original es por frecuencia de robo, no por</text>
+  <text class="note" x="652" y="322">probabilidad de elección humana: "123456" va primero,</text>
+  <text class="note" x="652" y="342">pero "password" está en la posición 2 y "qwerty" en la 4.</text>
+  <text class="note" x="652" y="362">xato-10M procede de filtraciones reales y ordena por uso</text>
+  <text class="note" x="652" y="382">efectivo, un proxy mejor de lo que elige una persona.</text>
+  <text class="note" x="652" y="402">Por eso va antes... pero la cola de rockyou sigue siendo clave.</text>
+
+  <!-- DESCARTES -->
+  <rect class="panel" x="20" y="426" width="1200" height="210" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <text class="crit" x="36" y="452">Técnicas evaluadas y descartadas</text>
+
+  <rect class="term" x="36" y="464" width="560" height="104" rx="7"/>
+  <text class="m" x="50" y="486">Enumeración de usuarios por temporización SSH</text>
+  <text class="note" x="50" y="506">Se midió el tiempo hasta el fallo de autenticación:</text>
+  <text class="ok" x="50" y="526">  tails 3,59 s   root 2,28/4,53 s   sonic 2,27/4,50 s</text>
+  <text class="bad" x="50" y="546">  control (inexistentes) 2,17 s ... 3,36 s</text>
+
+  <rect class="term" x="624" y="464" width="580" height="104" rx="7"/>
+  <text class="m" x="638" y="486">Por qué se descarta como enumerador</text>
+  <text class="note" x="638" y="506">El grupo de control mostró 1,1 s de dispersión: el ruido</text>
+  <text class="note" x="638" y="526">es del mismo orden que la señal. Con pocas muestras no</text>
+  <text class="note" x="638" y="546">se separan los grupos.</text>
+
+  <text class="note" x="36" y="584">Otras vías descartadas: solo hay 2 puertos (22 y 80); el índice web es el único fichero (gobuster + nikto con dos</text>
+  <text class="note" x="36" y="602">diccionarios + 12 extensiones + 24 vhosts + 212 rutas del tema); ningún método HTTP no estándar funciona (405).</text>
+  <text class="note" x="36" y="620">El escaneo UDP muestra open|filtered, que es el resultado normal sin respuesta y no indica servicios reales.</text>
+</svg>

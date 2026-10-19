@@ -1,0 +1,23 @@
+================================================================
+ Hedgehog — Evidencia de auditoria (fuerza bruta SSH + movimiento lateral)
+ Fecha (UTC) : 2026-10-19T21:53:42Z
+ Objetivo    : 172.17.0.2
+ Usuario     : tails
+ Fase        : Fase 2 — Posición de la credencial en rockyou
+ Comando     : tail -n 500 rockyou.txt | tac | sed 's/ //g' | nl -ba | grep 3117548331
+================================================================
+
+La contrasena no esta en la cabecera de rockyou, sino en su cola:
+
+    $ wc -l /usr/share/wordlists/rockyou.txt
+    14344392 /usr/share/wordlists/rockyou.txt
+
+    $ grep -n '3117548331' /usr/share/wordlists/rockyou.txt
+    14344302: 3117548331          <- a 91 lineas del final
+
+    $ tail -n 500 rockyou.txt | tac | sed 's/ //g' | sed '/^$/d' | nl -ba | grep 3117548331
+        88  3117548331              <- posicion 88 en la lista invertida
+
+Resultado del ataque dirigido:
+    [+] CREDENCIAL ENCONTRADA: tails / 3117548331
+    [*] 91 intentos en 20,1 s (5/s)

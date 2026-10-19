@@ -1,0 +1,35 @@
+================================================================
+ Hedgehog — Evidencia de auditoría
+ Fase 3 — Diccionarios y cobertura del barrido directo
+================================================================
+
+Se construyeron listas curadas (temática del laboratorio, estilo del autor,
+filtraciones públicas y diccionario español) y se recorrieron tramos de
+rockyou de delante hacia atrás. Ningún bloque alcanzó la posición
+14.344.302, donde vive la contraseña.
+
+  Bloque                                         Candidatos   Estado
+  ----------------------------------------------------------------------
+  Temática básica + rockyou top 3.000                 3.321   completo
+  Temática ampliada (29.336) + xato top 3.600        32.949   completo
+  Temática profunda + leet                            3.450   completo
+  Diccionario español (huecos)                       63.524   completo
+  Servicios (svc_probe)                               1.089   completo
+  Lista ordenada por probabilidad                    71.040   interrumpido
+  Estilo del autor                                   12.828   parcial
+  Diminutivos españoles                              56.440   parcial
+  Lista combinada final                             213.034   parcial
+  Lista de reanudación                              143.928   parcial
+  ----------------------------------------------------------------------
+  Total acumulado                                  ~276.000   sin acierto
+
+Medición de ritmo (evidence/03-fuerza-bruta/defensas-ssh.txt):
+
+  - 3,59 s de retardo por fallo (pam_fail_delay, delay=4000000).
+  - 6 intentos por conexión (MaxAuthTries).
+  - 40 hilos -> 11 intentos/s; 80 -> 22; 100 -> 29 (máximo medido).
+
+Con 29 intentos/s, rockyou completo (14,3 M de entradas) exigiría más de
+137 horas. El acierto llegó por la cola (véase credencial-hallada.txt):
+la contraseña es un número de 10 dígitos en la posición 14.344.302, a 91
+líneas del final de la lista.

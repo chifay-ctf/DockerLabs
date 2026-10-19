@@ -1,0 +1,32 @@
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+total 36
+drwxr-x--- 4 sonic sonic 4096 Oct 29  2024 .
+drwxr-xr-x 1 root  root  4096 Oct 29  2024 ..
+-rw------- 1 sonic sonic   72 Oct 29  2024 .bash_history
+-rw-r--r-- 1 sonic sonic  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 sonic sonic 3771 Mar 31  2024 .bashrc
+drwx------ 2 sonic sonic 4096 Oct 29  2024 .cache
+-rw-r--r-- 1 sonic sonic  807 Mar 31  2024 .profile
+-rw-r--r-- 1 sonic sonic    0 Oct 29  2024 .sudo_as_admin_successful
+drwxr-xr-x 2 sonic sonic 4096 Oct 29  2024 Documentos
+---HISTORY---
+ls
+cd Documentos
+ls
+cat contrasena
+sudo -l
+sudo -i
+sudo -l
+sudo -i
+exit
+---ROOT---
+uid=0(root) gid=0(root) groups=0(root)
+---
+total 24
+drwx------ 1 root root 4096 Oct 29  2024 .
+drwxr-xr-x 1 root root 4096 Oct 19 23:33 ..
+-rw------- 1 root root  150 Oct 29  2024 .bash_history
+-rw-r--r-- 1 root root 3106 Apr 22  2024 .bashrc
+-rw-r--r-- 1 root root  161 Apr 22  2024 .profile
+drwx------ 2 root root 4096 Oct 29  2024 .ssh
+---

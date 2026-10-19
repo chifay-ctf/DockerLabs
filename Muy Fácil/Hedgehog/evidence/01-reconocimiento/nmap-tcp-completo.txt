@@ -1,0 +1,22 @@
+# Nmap 7.991 scan initiated Mon Oct 19 15:42:14 2026 as: /usr/lib/nmap/nmap --privileged -p- -sV -sC -sT -vv -n -Pn --min-rate=5000 -oN "/home/chifay/DockerLabs/Muy Fácil/Hedgehog/nmap_hedgehog" 172.17.0.2
+Nmap scan report for 172.17.0.2
+Host is up, received user-set (0.00017s latency).
+Scanned at 2026-10-19 15:42:14 CST for 8s
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE REASON  VERSION
+22/tcp open  ssh     syn-ack OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 34:0d:04:25:20:b6:e5:fc:c9:0d:cb:c9:6c:ef:bb:a0 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNt2acaF9CKWqvibDqz36bJdqRXhBhBqCOAtvExAJy9Q2FullFAzNST6vJm0xFrlmpgS6fZb5+l3aTYFC18zyNU=
+|   256 05:56:e3:50:e8:f4:35:96:fe:6b:94:c9:da:e9:47:1f (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH2vWYkHZteiOgnLadFoN6gkctYlQYhtwGFeA7lm1OKE
+80/tcp open  http    syn-ack Apache httpd 2.4.58 ((Ubuntu))
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+| http-methods: 
+|_  Supported Methods: HEAD GET POST OPTIONS
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Oct 19 15:42:22 2026 -- 1 IP address (1 host up) scanned in 8.92 seconds

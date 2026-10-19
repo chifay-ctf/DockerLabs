@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 700" width="1240" height="700">
+  <style>
+    .bg{fill:#0b1120}
+    .panel{fill:#1e293b;stroke:#334155}
+    .term{fill:#020617;stroke:#334155}
+    .ttl{fill:#f8fafc;font:700 23px 'Segoe UI',system-ui,sans-serif}
+    .sub{fill:#94a3b8;font:400 13px 'Segoe UI',system-ui,sans-serif}
+    .h{fill:#f8fafc;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .m{fill:#cbd5e1;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .mm{fill:#38bdf8;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .ok{fill:#22c55e;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .bad{fill:#ef4444;font:700 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .warn{fill:#f59e0b;font:400 11.5px ui-monospace,Menlo,Consolas,monospace}
+    .note{fill:#94a3b8;font:400 11.5px 'Segoe UI',system-ui,sans-serif}
+    .crit{fill:#ef4444;font:700 13px 'Segoe UI',system-ui,sans-serif}
+    .tag{fill:#020617;font:700 10.5px 'Segoe UI',system-ui,sans-serif}
+  </style>
+  <rect class="bg" width="1240" height="700"/>
+  <text class="ttl" x="20" y="38">Por qué la fuerza bruta es lenta aquí</text>
+  <text class="sub" x="20" y="60">Tres límites del servidor medidos, y cómo determinan el rendimiento real</text>
+
+  <!-- LÍMITE 1 -->
+  <rect class="panel" x="20" y="84" width="392" height="214" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <rect x="36" y="98" width="146" height="22" rx="11" fill="#ef4444"/>
+  <text class="tag" x="48" y="114">LÍMITE 1 · 3,59 s</text>
+  <text class="h" x="36" y="144">Retardo por fallo de autenticación</text>
+  <text class="note" x="36" y="166">El sistema operativo añade al stack PAM:</text>
+  <rect class="term" x="36" y="178" width="360" height="40" rx="6"/>
+  <text class="m" x="48" y="196">auth required pam_fail_delay.so</text>
+  <text class="m" x="48" y="212">        delay=4000000</text>
+  <text class="note" x="36" y="240">El handshake dura 13 ms, pero cada intento</text>
+  <text class="note" x="36" y="258">fallido cuesta 3,59 s. Ese es el techo real.</text>
+  <text class="bad" x="36" y="282">rendimiento = hilos / 3,59 s</text>
+
+  <!-- LÍMITE 2 -->
+  <rect class="panel" x="424" y="84" width="392" height="214" rx="10" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="440" y="98" width="162" height="22" rx="11" fill="#f59e0b"/>
+  <text class="tag" x="452" y="114">LÍMITE 2 · 6 INTENTOS</text>
+  <text class="h" x="440" y="144">MaxAuthTries</text>
+  <text class="note" x="440" y="166">OpenSSH cierra la conexión al 6º intento:</text>
+  <rect class="term" x="440" y="178" width="360" height="58" rx="6"/>
+  <text class="m" x="452" y="196">intento 1..6  -&gt; AuthenticationException</text>
+  <text class="m" x="452" y="214">intento 7    -&gt; SSHException:</text>
+  <text class="bad" x="452" y="230">                "No existing session"</text>
+  <text class="note" x="440" y="254">El transporte no se puede reutilizar de</text>
+  <text class="note" x="440" y="272">forma ilimitada: hay que reconectar.</text>
+  <text class="warn" x="440" y="292">Optimización: 6 intentos por conexión.</text>
+
+  <!-- LÍMITE 3 -->
+  <rect class="panel" x="828" y="84" width="392" height="214" rx="10" stroke="#ef4444" stroke-width="2"/>
+  <rect x="844" y="98" width="172" height="22" rx="11" fill="#ef4444"/>
+  <text class="tag" x="856" y="114">LÍMITE 3 · MAXSTARTUPS</text>
+  <text class="h" x="844" y="144">Conexiones sin autenticar</text>
+  <text class="note" x="844" y="166">El valor 10:30:100 descarta conexiones</text>
+  <text class="note" x="844" y="184">nuevas cuando hay demasiadas a la vez.</text>
+  <rect class="term" x="844" y="194" width="360" height="58" rx="6"/>
+  <text class="bad" x="856" y="212">SSHException: Error reading SSH</text>
+  <text class="bad" x="856" y="230">    protocol banner [Errno 104]</text>
+  <text class="bad" x="856" y="248">    Connection reset by peer</text>
+  <text class="note" x="844" y="272">Los cortes aparecieron con dos procesos en</text>
+  <text class="note" x="844" y="290">paralelo (&gt;100 conexiones simultáneas).</text>
+
+  <!-- MEDICIONES -->
+  <rect class="panel" x="20" y="314" width="600" height="330" rx="10"/>
+  <text class="h" x="36" y="340">Rendimiento medido según el número de hilos</text>
+  <rect class="term" x="36" y="352" width="568" height="158" rx="7"/>
+  <text class="m" x="50" y="374">$ python3 tools/ssh_brute.py -H 172.17.0.2 -u tails -P lista -t N</text>
+  <text class="m" x="50" y="398">  8 hilos  -&gt;    2 intentos/s</text>
+  <text class="m" x="50" y="418"> 40 hilos  -&gt;   11 intentos/s</text>
+  <text class="m" x="50" y="438"> 80 hilos  -&gt;   22 intentos/s</text>
+  <text class="ok" x="50" y="458">100 hilos  -&gt;   29 intentos/s  <tspan fill="#64748b">// máximo medido</tspan></text>
+  <text class="warn" x="50" y="478">&gt;100 conex. -&gt;  cortes de banner (MaxStartups)</text>
+  <text class="note" x="36" y="514">Con 29 intentos/s, rockyou completo (14,3 M de entradas)</text>
+  <text class="note" x="36" y="534">exigiría más de 137 horas: la wordlist deja de ser un detalle</text>
+  <text class="note" x="36" y="554">y pasa a ser el núcleo del problema.</text>
+  <text class="note" x="36" y="580">Además, cada fallo cuesta 3,59 s de reloj en el servidor, así</text>
+  <text class="note" x="36" y="600">que el coste es por candidato, no por lote.</text>
+
+  <!-- ESTRATEGIA -->
+  <rect class="panel" x="636" y="314" width="584" height="330" rx="10" stroke="#38bdf8" stroke-width="2"/>
+  <text class="h" x="652" y="340" fill="#38bdf8">Estrategia aplicada</text>
+  <text class="note" x="652" y="366">1. Priorizar la lista en vez de barrer rockyou entero.</text>
+  <text class="note" x="652" y="388">2. Reutilizar el transporte: 6 intentos por conexión.</text>
+  <text class="note" x="652" y="410">3. 100 hilos: el óptimo medido; por encima empiezan los cortes.</text>
+  <text class="note" x="652" y="432">4. Ordenar los candidatos por probabilidad real de acierto:</text>
+  <rect class="term" x="652" y="444" width="552" height="84" rx="7"/>
+  <text class="mm" x="666" y="466">temática (Sega/Sonic)  -&gt;  estilo del autor  -&gt;  xato-net-10M</text>
+  <text class="mm" x="666" y="486">top 100k  -&gt;  nmap.lst + john.lst  -&gt;  rockyou por tramos</text>
+  <text class="mm" x="666" y="506">-&gt;  diccionario español por longitud</text>
+  <text class="warn" x="666" y="550">Evaluado y descartado: canal lateral de temporización para</text>
+  <text class="warn" x="666" y="566">enumerar usuarios. Reales e inexistentes muestran la misma</text>
+  <text class="note" x="652" y="588">alternancia X/2X (bases de 1,8–2,4 s): el patrón no separa</text>
+  <text class="note" x="652" y="606">cuentas. El control negativo (usuarios inventados) se comportó</text>
+  <text class="note" x="652" y="624">igual que tails y sonic.</text>
+</svg>

@@ -1,0 +1,14 @@
+[*] 01 · Reconocimiento
+  [+] evidence/01-recon/nmap_full_scan.txt
+  [+] evidence/01-recon/web_hint.txt
+[*] 02 · Fuerza bruta
+  [+] evidence/02-brute-force/credential_found.txt
+  [+] evidence/02-brute-force/reversed_wordlist_position.txt
+[*] 03 · Movimiento lateral y escalada
+  [+] evidence/03-lateral-movement/sudo_rules_tails.txt
+  [+] evidence/03-lateral-movement/housekeeping_tails.txt
+  [+] evidence/03-lateral-movement/sudo_rules_sonic.txt
+[*] 04 · Escalada a root
+  [+] evidence/04-root/root_proof.txt
+
+[+] Captura completada.

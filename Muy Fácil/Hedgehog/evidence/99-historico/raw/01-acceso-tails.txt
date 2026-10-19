@@ -1,0 +1,20 @@
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+uid=1002(tails) gid=1002(tails) groups=1002(tails)
+---
+378958b2c98e
+---
+total 28
+drwxr-x--- 1 tails tails 4096 Oct 19 23:35 .
+drwxr-xr-x 1 root  root  4096 Oct 29  2024 ..
+-rw-r--r-- 1 tails tails  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 tails tails 3771 Mar 31  2024 .bashrc
+drwx------ 2 tails tails 4096 Oct 19 23:35 .cache
+-rw-r--r-- 1 tails tails  807 Mar 31  2024 .profile
+---
+User tails may run the following commands on 378958b2c98e:
+    (sonic) NOPASSWD: ALL
+---
+/home/tails/.bashrc
+/home/tails/.bash_logout
+/home/tails/.profile
+/home/tails/.cache/motd.legal-displayed
