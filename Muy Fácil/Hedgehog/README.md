@@ -92,8 +92,6 @@ El detalle completo, con comandos y salidas, está en **[`AUDITORIA.md`](AUDITOR
 .
 ├── README.md              este documento
 ├── AUDITORIA.md           informe completo de la auditoría
-├── auto_deploy.sh         script original de DockerLabs
-├── hedgehog.tar           imagen del laboratorio (no versionada)
 ├── img/                   4 diagramas (SVG editable + PNG)
 ├── evidence/              evidencia por fase, con SHA256SUMS
 │   ├── 01-reconocimiento/
